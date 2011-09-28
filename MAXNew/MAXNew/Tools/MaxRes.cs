@@ -446,7 +446,7 @@ new byte[]{0xff, 0xff, 0xff, 0x00}, //255
         
         public static void convertAll(string path)
         {
-            string[] filenames = System.IO.Directory.GetFiles(SystemConfiguration.AppPath + path);
+            //string[] filenames = System.IO.Directory.GetFiles(SystemConfiguration.AppPath + path);
             /* for (int i = 1427; i < filenames.Length; i++)
                  if (isImagePaletted(filenames[i]))
                      convertPalettedImage(filenames[i]);
