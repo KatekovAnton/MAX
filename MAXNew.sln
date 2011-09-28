@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAXNew", "MAXNew\MAXNew\MAXNew.csproj", "{25F8D34F-BE8F-4972-9185-3E2EAA7CFFAA}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MAXNewContent", "MAXNew\MAXNewContent\MAXNewContent.contentproj", "{60F17E86-ECF3-4900-B7BD-654C8EFA50DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25F8D34F-BE8F-4972-9185-3E2EAA7CFFAA}.Debug|x86.ActiveCfg = Debug|x86
+		{25F8D34F-BE8F-4972-9185-3E2EAA7CFFAA}.Debug|x86.Build.0 = Debug|x86
+		{25F8D34F-BE8F-4972-9185-3E2EAA7CFFAA}.Release|x86.ActiveCfg = Release|x86
+		{25F8D34F-BE8F-4972-9185-3E2EAA7CFFAA}.Release|x86.Build.0 = Release|x86
+		{60F17E86-ECF3-4900-B7BD-654C8EFA50DF}.Debug|x86.ActiveCfg = Debug|x86
+		{60F17E86-ECF3-4900-B7BD-654C8EFA50DF}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
