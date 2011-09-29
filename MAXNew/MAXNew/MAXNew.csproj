@@ -108,7 +108,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\GameConfiguration.cs" />
     <Compile Include="Config\SystemConfiguration.cs" />
+    <Compile Include="Game\Graphic\GraphicMap.cs" />
+    <Compile Include="Tools\GraphicTools.cs" />
+    <Compile Include="Game\Graphic\GraphicUnit.cs" />
     <Compile Include="Helpers\FpsCounter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -152,9 +156,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Game\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Green_6.wrl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
