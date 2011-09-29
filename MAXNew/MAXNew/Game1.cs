@@ -13,6 +13,7 @@ using System.IO;
 
 using MAXNew.Helpers;
 using MAXNew.Config;
+using MAXNew.Game;
 using MAXNew.Game.Graphic;
 
 namespace MAXNew
@@ -29,14 +30,19 @@ namespace MAXNew
         public FpsCounter FPSCounter;
         public SpriteFont font1;
 
+        //camera
+        public static Camera camera;
 
-        GraphicMap draw;
+        public Map map;
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
 
         public Game1()
         {
+            
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -57,18 +63,22 @@ namespace MAXNew
         GraphicUnit alienTank;
         protected override void Initialize()
         {
+            GameConfiguration.ScreenBounds = this.Window.ClientBounds;
+            GameConfiguration.ScreenResolution = new Vector2(this.GraphicsDevice.Viewport.Width, this.GraphicsDevice.Viewport.Height);
             // TODO: Add your initialization logic here
             base.Initialize();
             //Tools.MaxRes.maxresunpak("max.res", "\\unpacked");
             device = this.GraphicsDevice;
             /* SpriteTexture =*/
             //Tools.MaxRes.convertAll("\\unpacked\\");
-            Tools.MapBase baseinfo = Tools.MaxRes.loadWrl("Green_6.wrl");
-            draw = new GraphicMap(baseinfo);
+            map = Tools.MaxRes.loadWrl("Green_6.wrl");
+            map.mapDraw = new GraphicMap(map);
+            map.clearLoadData();
             FileStream str1 = new FileStream("D:\\GAME\\MAX\\MAXNew\\MAXNew\\MAXNew\\bin\\x86\\Debug\\unpacked\\ALNTANK", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
             BinaryReader inf = new BinaryReader(str1);
             alienTank = Tools.MaxRes.LoadMultiImage(inf);
-
+            camera = new Camera(map);
+            
         }
 
         /// <summary>
@@ -79,6 +89,7 @@ namespace MAXNew
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            GraphicMap.mapSprite = new SpriteBatch(GraphicsDevice);
             font1 = Content.Load<SpriteFont>("SpriteFont1");
             // TODO: use this.Content to load your game content here
         }
@@ -113,6 +124,35 @@ bool lf = true;
             }
             if (ks.IsKeyUp(Keys.L))
                 lf = true;
+
+            Vector2 cameraMove = Vector2.Zero;
+            bool needMove = false;
+            if (ks.IsKeyDown(Keys.Up))
+            {
+                needMove = true;
+                cameraMove.Y += -1;
+            }
+            if (ks.IsKeyDown(Keys.Down))
+            {
+                cameraMove.Y += 1;
+                needMove = cameraMove.Y!=0;
+            }
+
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                needMove = true;
+                cameraMove.X += -1;
+            }
+            if (ks.IsKeyDown(Keys.Right))
+            {
+                cameraMove.X += 1;
+                needMove = cameraMove.X!=0;
+            }
+            if (needMove)
+            {
+                //cameraMove.Normalize();
+                camera.updateMove(gameTime, cameraMove);
+            }
             base.Update(gameTime);
         }
 
@@ -125,10 +165,10 @@ bool lf = true;
             GraphicsDevice.Clear(Color.CornflowerBlue);
             GraphicsDevice.BlendState = BlendState.Opaque;
             // TODO: Add your drawing code here
+            map.draw();
             spriteBatch.Begin();
-            Vector2 pos = new Vector2(100,100);
-            spriteBatch.Draw(draw.mapElementsSingle, pos,draw.rectangles[10], Color.White);
-            
+
+            Vector2 pos = new Vector2(100, 100);
             spriteBatch.Draw(alienTank.textures[index], pos - alienTank.frames[index].centerDelta + GameConfiguration.halfCell, Color.White);
             spriteBatch.DrawString(font1, string.Format("FPS: {0} Frame time: {1}", FPSCounter.FramesPerSecond, FPSCounter.FrameTime), Vector2.Zero, Color.White);
             spriteBatch.End();

@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 
 using MAXNew;
+using MAXNew.Game;
 using MAXNew.Game.Graphic;
 
 namespace MAXNew.Tools
@@ -25,27 +26,15 @@ namespace MAXNew.Tools
         public int size;
     }
 
-    public sealed class MapBase
-    {
-        public string name;
-        public int w, h;
-        public byte[] minimap;
-        public short[] map;
-        public short elementCount;
-        public byte[][] mapElements;
-        public byte[] palette;
-        public byte[] groundType;//0-ground 1-water 2-coast 3-unpassable
-    }
-
     public sealed class MaxRes
     {
         const int pal_size = 0x300;
         const int max_width = 640;
         const int max_height = 480;
 
-        public static MapBase loadWrl(string name)
+        public static Map loadWrl(string name)
         {
-            MapBase map = new MapBase();
+            Map map = new Map();
             System.IO.FileStream str1 = new System.IO.FileStream(name, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
 
             BinaryReader inf = new System.IO.BinaryReader(str1);

@@ -110,7 +110,9 @@
   <ItemGroup>
     <Compile Include="Config\GameConfiguration.cs" />
     <Compile Include="Config\SystemConfiguration.cs" />
+    <Compile Include="Game\Camera.cs" />
     <Compile Include="Game\Graphic\GraphicMap.cs" />
+    <Compile Include="Game\Map.cs" />
     <Compile Include="Tools\GraphicTools.cs" />
     <Compile Include="Game\Graphic\GraphicUnit.cs" />
     <Compile Include="Helpers\FpsCounter.cs" />

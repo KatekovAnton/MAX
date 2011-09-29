@@ -10,12 +10,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MAXNew.Game.Graphic
 {
-    class GraphicMap
+    public class GraphicMap
     {
+        public static SpriteBatch mapSprite;
         public Texture2D minimap;
         public Texture2D mapElementsSingle;
         public Microsoft.Xna.Framework.Rectangle[] rectangles;
-        public GraphicMap(MapBase map)
+        public GraphicMap(Map map)
         {
             minimap = GraphicTools.TextureFromIndexAndPalette(map.w, map.h, map.minimap, map.palette);
 
