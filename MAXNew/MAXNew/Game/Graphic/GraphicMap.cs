@@ -21,7 +21,7 @@ namespace MAXNew.Game.Graphic
             minimap = GraphicTools.TextureFromIndexAndPalette(map.w, map.h, map.minimap, map.palette);
 
 
-            int w = 10;
+            int w = 20;
             int h = map.elementCount / w;
             if (w * h < map.elementCount)
                 h++;
