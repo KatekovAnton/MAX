@@ -13,10 +13,15 @@ namespace MAXNew.Game
 {
     public sealed class Camera
     {
+        //sataic camera scroll speed
+        public static double scrollSpeed = 16.0;
+
+
+        //for scale (in world coord)
         public Vector2 currentCenter;
+        //current scale
         public double scale;
 
-        public static double scrollSpeed = 16.0;
 
         //full map rectangle (without scale)
         public Rectangle mapBounds;
@@ -24,10 +29,11 @@ namespace MAXNew.Game
         public Rectangle visibleScreenBounds;
         //screen rectangle in world coords (scaled/moved)
         public Rectangle visibleMapBounds;
-
         //map cells in screen rectangle
         public Rectangle visibleMapCELLBounds;
 
+
+        //coordSystem for drawing
         public Vector2 topleftPoint;
 
         public Camera(Map map)
@@ -42,7 +48,7 @@ namespace MAXNew.Game
             correctScreen();
         }
 
-        public void updateScale(GameTime gt, float scaleRange)
+        public void updateScale(GameTime gt, Vector2 mousePos, float scaleRange)
         {
             if (scaleRange == 0)
                 return;
@@ -55,7 +61,6 @@ namespace MAXNew.Game
             visibleMapBounds.Y += (int)(moveVector.Y * moveRange);
 
             correctBounds();
-
             correctScreen();
         }
 
