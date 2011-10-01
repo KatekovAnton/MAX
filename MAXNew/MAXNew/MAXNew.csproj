@@ -113,6 +113,7 @@
     <Compile Include="Game\Camera.cs" />
     <Compile Include="Game\Graphic\GraphicMap.cs" />
     <Compile Include="Game\Map.cs" />
+    <Compile Include="Helpers\MouseManager.cs" />
     <Compile Include="Tools\GraphicTools.cs" />
     <Compile Include="Game\Graphic\GraphicUnit.cs" />
     <Compile Include="Helpers\FpsCounter.cs" />

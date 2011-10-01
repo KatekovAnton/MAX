@@ -36,10 +36,10 @@ namespace MAXNew.Game.Graphic
                 //каждый блок по строчке
                 for (int j = 0; j < 64; j++)
                     Buffer.BlockCopy(map.mapElements[i], j * 64, singleArray, x * 64 + w * 64 * 64 * y + j * 64 * w, 64);
-                rectangles[i].X = x * 64;
-                rectangles[i].Y = y * 64;
-                rectangles[i].Width = 64;
-                rectangles[i].Height = 64;
+                rectangles[i].X = x * 64+1;
+                rectangles[i].Y = y * 64+1;
+                rectangles[i].Width = 63;
+                rectangles[i].Height = 63;
             }
 
             mapElementsSingle = GraphicTools.TextureFromIndexAndPalette(64 * w, 64 * h, singleArray, map.palette);

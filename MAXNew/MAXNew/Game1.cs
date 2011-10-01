@@ -26,12 +26,17 @@ namespace MAXNew
         //device
         public static GraphicsDevice device;
 
+        //mouse
+        public static MouseManager mouseManager;
+
         //fps and debug info
         public FpsCounter FPSCounter;
         public SpriteFont font1;
 
         //camera
         public static Camera camera;
+
+        
 
         public Map map;
 
@@ -69,6 +74,7 @@ namespace MAXNew
             base.Initialize();
             //Tools.MaxRes.maxresunpak("max.res", "\\unpacked");
             device = this.GraphicsDevice;
+            mouseManager = new MouseManager();
             /* SpriteTexture =*/
             //Tools.MaxRes.convertAll("\\unpacked\\");
             map = Tools.MaxRes.loadWrl("Green_6.wrl");
@@ -113,7 +119,7 @@ bool lf = true;
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
+            mouseManager.Update();
             // TODO: Add your update logic here
             FPSCounter.Update(gameTime);
             KeyboardState ks = Keyboard.GetState();
@@ -126,6 +132,14 @@ bool lf = true;
             }
             if (ks.IsKeyUp(Keys.L))
                 lf = true;
+
+
+            bool needupdate = false;
+            if (mouseManager.scrollWheelDelta != 0)
+            {
+                camera.updateScale(gameTime, mouseManager.mousePos, mouseManager.scrollWheelDelta > 0 ? 1 : -1);
+                needupdate = true;
+            }
 
             Vector2 cameraMove = Vector2.Zero;
             bool needMove = false;
@@ -155,6 +169,8 @@ bool lf = true;
                 //cameraMove.Normalize();
                 camera.updateMove(gameTime, cameraMove);
             }
+            if (needMove || needupdate)
+                camera.UpdateFinalInfo();
             base.Update(gameTime);
         }
 
@@ -173,6 +189,7 @@ bool lf = true;
             Vector2 pos = new Vector2(100, 100);
             spriteBatch.Draw(alienTank.textures[index], pos - alienTank.frames[index].centerDelta + GameConfiguration.halfCell, Color.White);
             spriteBatch.DrawString(font1, string.Format("FPS: {0} Frame time: {1}", FPSCounter.FramesPerSecond, FPSCounter.FrameTime), Vector2.Zero, Color.White);
+            spriteBatch.DrawString(font1, string.Format("scale: {0}", camera.scale), Vector2.Zero + new Vector2(0,20), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

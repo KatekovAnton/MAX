@@ -42,14 +42,22 @@ namespace MAXNew.Game
             spr.Begin(SpriteSortMode.Deferred,BlendState.Opaque,SamplerState.PointClamp,DepthStencilState.None,RasterizerState.CullNone);
             float dx = 0;
             float dy = 64 * cam.visibleMapCELLBounds.Y;
-
-            for (int i = cam.visibleMapCELLBounds.Y; i < cam.visibleMapCELLBounds.Height + cam.visibleMapCELLBounds.Y; i++)
+            Vector2 campoint = new Vector2((float)Math.Floor((double)cam.topleftPoint.X), (float)Math.Floor((double)cam.topleftPoint.Y));
+            float camscale = cam.scale + 0.03f;
+            for (int i = cam.visibleMapCELLBounds.Top; i < cam.visibleMapCELLBounds.Bottom; i++)
             {
                 dx = 64 * cam.visibleMapCELLBounds.X;
-                for (int j = cam.visibleMapCELLBounds.X; j < cam.visibleMapCELLBounds.Width + cam.visibleMapCELLBounds.X; j++)
+                for (int j = cam.visibleMapCELLBounds.Left; j < cam.visibleMapCELLBounds.Right; j++)
                 {
                     int index = i * w + j;
-                    spr.Draw(mapDraw.mapElementsSingle, new Vector2(dx, dy)-cam.topleftPoint, mapDraw.rectangles[map[index]], Color.White,0.0f,Vector2.Zero,1.0f, SpriteEffects.None,0);
+                    spr.Draw(mapDraw.mapElementsSingle,
+                        (new Vector2(dx, dy)-cam.topleftPoint)*cam.scale,
+                        mapDraw.rectangles[map[index]], 
+                        Color.White,
+                        0.0f,
+                        Vector2.Zero,
+                        camscale,
+                        SpriteEffects.None,0);
                     dx += 64;
                 }
                 dy += 64;
