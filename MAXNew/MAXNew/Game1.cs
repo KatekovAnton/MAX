@@ -74,7 +74,9 @@ namespace MAXNew
             map = Tools.MaxRes.loadWrl("Green_6.wrl");
             map.mapDraw = new GraphicMap(map);
             map.clearLoadData();
-            FileStream str1 = new FileStream("D:\\GAME\\MAX\\MAXNew\\MAXNew\\MAXNew\\bin\\x86\\Debug\\unpacked\\AIREXPLD", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+
+            FileStream str1 = new FileStream(SystemConfiguration.AppPath + "\\unpacked\\AIREXPLD", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+
             BinaryReader inf = new BinaryReader(str1);
             alienTank = Tools.MaxRes.LoadMultiImage(inf);
             camera = new Camera(map);
