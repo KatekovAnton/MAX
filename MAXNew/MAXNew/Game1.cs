@@ -59,11 +59,11 @@ namespace MAXNew
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
 
-           /* 
+            /* 
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.ToggleFullScreen();
-           */
+            */
 
             //disable vsync
             graphics.SynchronizeWithVerticalRetrace = false;

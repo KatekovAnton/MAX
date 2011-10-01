@@ -14,14 +14,12 @@ namespace MAXNew.Game
     public sealed class Camera
     {
         //sataic camera scroll speed
-        public static double scrollSpeed = 16.0;
+        public double scrollSpeed = 16.0;
 
 
-        //for scale (in world coord)
-        public Vector2 currentCenter;
         //current scale
         public float scale;
-        public float scaleSpeed;
+        public float scaleSpeed = 2.0f;
         public float scaleMinBound;
 
 
@@ -49,7 +47,6 @@ namespace MAXNew.Game
         public Camera(Map map)
         {
             scale = 1.0f;
-            scaleSpeed = 1.0f;
             mapBounds.X = mapBounds.Y = 0;
             mapBounds.Width = map.w * 64;
             mapBounds.Height = map.h * 64;
@@ -68,6 +65,7 @@ namespace MAXNew.Game
             scaleMinBoundX = GameConfiguration.ScreenResolution.X / (map.w * 64);
             scaleMinBoundY = GameConfiguration.ScreenResolution.Y / (map.h * 64);
             scaleMinBound = scaleMinBoundX > scaleMinBoundY ? scaleMinBoundX : scaleMinBoundY;
+            scaleMinBound = scaleMinBound < GameConfiguration.scaleFullMin ? GameConfiguration.scaleFullMin : scaleMinBound;
             correctScreen();
         }
 
@@ -75,7 +73,7 @@ namespace MAXNew.Game
         {
             if (scaleRange == 0)
                 return;
-            float moveRange = (float)(gt.ElapsedGameTime.TotalMilliseconds * scaleRange * scaleSpeed / 100);
+            float moveRange = (float)(gt.ElapsedGameTime.TotalMilliseconds * scaleRange * scale * scaleSpeed / 100);
             Vector2 moseWorldScreenDeltaPos = new Vector2(mousePos.X / scale,  mousePos.Y / scale);
             float oldscale = scale;
 
@@ -87,7 +85,7 @@ namespace MAXNew.Game
 
             if (scale < scaleMinBound)
                 scale = scaleMinBound;
-
+           
             //если удаляем то отрицательное
       
 
