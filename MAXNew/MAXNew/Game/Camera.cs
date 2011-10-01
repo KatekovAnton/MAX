@@ -89,7 +89,7 @@ namespace MAXNew.Game
                 scale = scaleMinBound;
 
             //если удаляем то отрицательное
-           // Vector2 moseWorldScreenDeltaPosNew = moseWorldScreenDeltaPos  - new Vector2(mousePos.X / scale,  mousePos.Y / scale);
+      
 
             visibleMapBounds.X += (int)(moseWorldScreenDeltaPos.X - mousePos.X / scale);
             visibleMapBounds.Y += (int)(moseWorldScreenDeltaPos.Y - mousePos.Y / scale);

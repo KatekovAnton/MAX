@@ -50,13 +50,27 @@ namespace MAXNew
             
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            
             FPSCounter = new FpsCounter();
 
+
+            //sets destination resolution
+
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 800;
+
+           /* 
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.ToggleFullScreen();
+           */
 
             //disable vsync
             graphics.SynchronizeWithVerticalRetrace = false;
             IsFixedTimeStep = false;
+            
+            //sets mouse visible
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -68,12 +82,18 @@ namespace MAXNew
         GraphicUnit alienTank;
         protected override void Initialize()
         {
+            
+
             GameConfiguration.ScreenBounds = this.Window.ClientBounds;
             GameConfiguration.ScreenResolution = new Vector2(this.GraphicsDevice.Viewport.Width, this.GraphicsDevice.Viewport.Height);
             // TODO: Add your initialization logic here
             base.Initialize();
             //Tools.MaxRes.maxresunpak("max.res", "\\unpacked");
+            //graphics.IsFullScreen = true;
+            
+            
             device = this.GraphicsDevice;
+            
             mouseManager = new MouseManager();
             /* SpriteTexture =*/
             //Tools.MaxRes.convertAll("\\unpacked\\");
