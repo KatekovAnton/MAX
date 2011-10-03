@@ -12,6 +12,7 @@ namespace MAXNew.Game.Graphic
 {
     public class GraphicMap
     {
+        public static Effect mapShader;
         public static SpriteBatch mapSprite;
         public Texture2D minimap;
         public Texture2D mapElementsSingle;

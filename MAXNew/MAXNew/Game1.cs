@@ -88,15 +88,14 @@ namespace MAXNew
             GameConfiguration.ScreenResolution = new Vector2(this.GraphicsDevice.Viewport.Width, this.GraphicsDevice.Viewport.Height);
             // TODO: Add your initialization logic here
             base.Initialize();
-            //Tools.MaxRes.maxresunpak("max.res", "\\unpacked");
+
             //graphics.IsFullScreen = true;
             
             
             device = this.GraphicsDevice;
             
             mouseManager = new MouseManager();
-            /* SpriteTexture =*/
-            //Tools.MaxRes.convertAll("\\unpacked\\");
+
             map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Snow_3.wrl");
             map.mapDraw = new GraphicMap(map);
             map.clearLoadData();
@@ -118,6 +117,8 @@ namespace MAXNew
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicMap.mapSprite = new SpriteBatch(GraphicsDevice);
+
+            GraphicMap.mapShader = Content.Load<Effect>("MapRender");
             font1 = Content.Load<SpriteFont>("SpriteFont1");
             // TODO: use this.Content to load your game content here
         }

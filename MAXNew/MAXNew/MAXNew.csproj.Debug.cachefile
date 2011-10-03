@@ -1,4 +1,5 @@
 Content\SpriteFont1.xnb
+Content\MapRender.xnb
 data\lng\eng.lng
 data\lng\rus.lng
 data\maps\112x112.wrl
@@ -28,7 +29,6 @@ data\maps\Snow_4.wrl
 data\maps\Snow_5.wrl
 data\maps\Snow_6.wrl
 data\rules.cfg
-Green_6.wrl
 unpacked\AIREXPLD
 unpacked\AIRPLT
 unpacked\AIRTRANS
