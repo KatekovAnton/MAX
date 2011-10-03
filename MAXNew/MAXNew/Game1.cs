@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Media;
 using System.IO;
 
 using MAXNew.Helpers;
-using MAXNew.Config;
 using MAXNew.Game;
 using MAXNew.Game.Graphic;
 
@@ -98,6 +97,7 @@ namespace MAXNew
 
             map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Snow_3.wrl");
             map.mapDraw = new GraphicMap(map);
+            GraphicMap.mapShader.Parameters["ViewportSize"].SetValue(GameConfiguration.ScreenResolution);
             map.clearLoadData();
 
             FileStream str1 = new FileStream(SystemConfiguration.AppPath + "\\unpacked\\AIREXPLD", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);

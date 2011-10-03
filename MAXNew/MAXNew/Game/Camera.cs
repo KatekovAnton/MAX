@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using MAXNew.Tools;
-using MAXNew.Config;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

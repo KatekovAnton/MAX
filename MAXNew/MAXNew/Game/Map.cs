@@ -38,8 +38,8 @@ namespace MAXNew.Game
         {
             SpriteBatch spr = GraphicMap.mapSprite;
             Camera cam = Game1.camera;
-
-            spr.Begin(SpriteSortMode.Deferred,BlendState.Opaque,SamplerState.PointClamp,DepthStencilState.None,RasterizerState.CullNone);
+            
+            spr.Begin(SpriteSortMode.Deferred,BlendState.Opaque,SamplerState.PointClamp,DepthStencilState.None,RasterizerState.CullNone,GraphicMap.mapShader);
             float dx = 0;
             float dy = 64 * cam.visibleMapCELLBounds.Y;
             Vector2 campoint = new Vector2((float)Math.Floor((double)cam.topleftPoint.X), (float)Math.Floor((double)cam.topleftPoint.Y));

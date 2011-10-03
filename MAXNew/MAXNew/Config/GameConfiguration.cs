@@ -5,7 +5,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 
-namespace MAXNew.Config
+namespace MAXNew
 {
     public sealed class GameConfiguration
     {
