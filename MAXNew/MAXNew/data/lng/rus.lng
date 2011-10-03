@@ -1,0 +1,87 @@
+locale=Rus
+descrpath=unitsdes\rus
+gnam=M.A.X. Gold
+
+icnm=Загрузка в нормальном режиме запрещена.
+lidmd= Загрузка в отладочном режиме приведёт к его инвалидации.
+indm= создан в отладочном режиме.
+innm= создан в нормальном режиме.
+dwc=Продолжить?
+notdescr=Есть добровольцы писать описания?
+cancel=Отмена
+stdgname=Игра
+First=Первый
+Second=Второй
+endturn=Кон. хода
+
+errmapl-fnf=Ошибка при загрузке карты - не найден(ы) файл(ы):
+errmapl=Error loading map.
+errmapl-mimap=Ошибка загрузки Миникарты от
+errld-errin=Ошибка в
+errld-nvr=или не та версия
+
+err=Ошибка
+crerr=Критическая ошибка
+errcont=Продолжить?
+stderr=Ошибка в проседуре
+
+endturn=Конец хода
+trn-N=Ход #
+fintr=Текущий ход:
+nxtrn=Следующим ходит:
+load=Загруз
+save=Сохран
+cont=Далее
+back=Назад
+
+sv_game_list=Получение списка игр
+sv_upload=Взкачивается
+sv_download=Скачивается
+sv_getting_info=Запрос о
+
+saveload=Загрузить\Сохранить
+saveas=Сохранить как
+info=Информация
+build=Строительство
+fullscr=Полноэкранный
+
+trnstr#=Начало хода #
+selapo=Выберите место для посадки
+dest=Уничтожен(а)
+surrender=Сдаться
+
+rig-auto=Автоход
+rig-bld=Строить
+rig-act=Выпустить
+rig-atk=Атака
+rig-ld=Войти
+rig-ref=Заправить
+rig-get=Загрузить
+rig-trn=Передача
+rig-stop=Стоп
+rig-strt=Старт
+rig-blw=Подрыв
+rig-done=Готово
+rig-cln=Очистка
+rig-rel=Перезаряд
+rig-rep=Чинить
+rig-resc=Исследовть
+rig-allc=Распредел
+rig-upg=Обновить
+rig-bomb=Минировать
+rig-unbomb=Обезминить
+rig-steal=Захватить
+rig-disable=Отключить
+rig-sentry=Сторож
+rig-upd=Улучш.
+rig-updall=Ул. все
+rig-move=Идти
+
+msg-not-enough=Недостаточно
+msg-provides=Не может быть отключено. Базе нужно больше
+
+materials=Железа
+fuels=Топлива
+golds=Золота
+powers=Энергии
+mans=Людей

@@ -59,7 +59,7 @@ namespace MAXNew
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
 
-            /* 
+            /*
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.ToggleFullScreen();
@@ -97,7 +97,7 @@ namespace MAXNew
             mouseManager = new MouseManager();
             /* SpriteTexture =*/
             //Tools.MaxRes.convertAll("\\unpacked\\");
-            map = Tools.MaxRes.loadWrl("Green_6.wrl");
+            map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Snow_3.wrl");
             map.mapDraw = new GraphicMap(map);
             map.clearLoadData();
 

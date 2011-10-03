@@ -14,12 +14,12 @@ namespace MAXNew.Game
     public sealed class Camera
     {
         //sataic camera scroll speed
-        public double scrollSpeed = 16.0;
+        public double scrollSpeed = 25.0;
 
 
         //current scale
         public float scale;
-        public float scaleSpeed = 2.0f;
+        public float scaleSpeed = 3.0f;
         public float scaleMinBound;
 
 

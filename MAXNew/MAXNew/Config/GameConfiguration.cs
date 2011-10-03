@@ -13,5 +13,7 @@ namespace MAXNew.Config
         public static Rectangle ScreenBounds;
         public static Vector2 ScreenResolution;
         public static float scaleFullMin = 0.1f;
+
+        public static Dictionary<string, string> rules = new Dictionary<string,string>();
     }
 }

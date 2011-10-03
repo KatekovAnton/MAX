@@ -10,6 +10,39 @@ namespace MAXNew.Tools
 {
     public sealed class GraphicTools
     {
+        public static void palshiftu(Color[] pal, int s, int e)
+        {
+            Color cl = pal[e];
+            for (int i = e; i >= s + 1; i--)
+                pal[i] = pal[i - 1];
+            pal[s] = cl;
+        }
+
+        public static void palshiftd(Color[] pal, int s, int e)
+        {
+            Color cl = pal[s];
+            for (int i = s; i <= e - 1; i++)
+                pal[i] = pal[i + 1];
+            pal[e] = cl;
+        }
+
+        public static void animatePalette(Color[] thepal)
+        {
+            palshiftd(thepal, 9, 12);
+            palshiftu(thepal, 13, 16);
+            palshiftu(thepal, 17, 20);
+            palshiftu(thepal, 21, 24);
+
+            palshiftu(thepal, 25, 30);
+            //palblnkd(thepal, 31, 1 - frac(gct), gclgreen);
+
+            palshiftu(thepal, 96, 102);
+            palshiftu(thepal, 103, 109);
+            palshiftu(thepal, 110, 116);
+            palshiftu(thepal, 117, 122);
+            palshiftu(thepal, 123, 127);
+        }
+
         public static Texture2D TextureFromIndexAndPalette(int w, int h, byte[] indexes, byte[] palette)
         {
             Texture2D result = new Texture2D(Game1.device, w, h, false, SurfaceFormat.Color);

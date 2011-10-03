@@ -1,0 +1,87 @@
+locale=Eng
+descrpath=unitsdes\eng
+gnam=M.A.X. Gold
+
+icnm=Loading in normal mode is prohibted.    
+lidmd= Loading in debug mode will invalidate it.
+indm= was created in debug mode.
+innm= was created in normal mode. 
+dwc=Are you sure you want to continue?
+notdescr=No description...
+cancel=Cancel  
+stdgname=Game
+First=First
+Second=Second
+endturn=End turn
+
+errmapl-fnf=Error loading map - file(s) not found:
+errmapl=Error loading map.
+errmapl-mimap=Error loading minimap of
+errld-errin=Error in
+errld-nvr=or the version is wrong
+
+err=Error
+crerr=Critical error
+errcont=Continue?
+stderr=Error in procedure
+
+endturn=End of Turn
+trn-N=Turn #
+fintr=Current turn:
+nxtrn=Next turn by:
+load=Load
+save=Save
+cont=Cont
+back=Back
+
+sv_game_list=Getting games list
+sv_upload=Uploading
+sv_download=Downloading
+sv_getting_info=Getting info on
+
+saveload=Save/Load 
+saveas=Save as
+info=Information
+build=Construction
+fullscr=FullScreen
+
+trnstr#=Start of turn #
+selapo=Select landing position
+dest=Destroyed
+surrender=Surrender
+
+rig-auto=Autorun
+rig-bld=Build
+rig-act=Activate 
+rig-atk=Attack
+rig-ld=Enter
+rig-ref=Refuel
+rig-get=Load
+rig-trn=X-fer
+rig-stop=Stop
+rig-strt=Start
+rig-blw=Remove
+rig-done=Done
+rig-cln=Clean
+rig-rel=Reload
+rig-rep=Repair
+rig-resc=Research
+rig-allc=Allocate
+rig-upg=Upgrade
+rig-bomb=Put mines
+rig-unbomb=Unmine
+rig-steal=Steal
+rig-disable=Disable
+rig-sentry=Sentry
+rig-upd=Upgr.
+rig-updall=Up. all
+rig-move=Move
+
+msg-not-enough=Not enough
+msg-provides=Can not be stoped. Provides
+
+materials=Materials
+fuels=Fuel
+golds=Gold
+powers=Power
+mans=Man
