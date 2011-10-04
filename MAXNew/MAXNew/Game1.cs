@@ -95,9 +95,9 @@ namespace MAXNew
             
             mouseManager = new MouseManager();
 
-            map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Snow_3.wrl");
+            map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Crater_5.wrl");
             map.mapDraw = new GraphicMap(map);
-            Animator.Instance.AddAObject(map.AddFrame, 150.0);
+            Animator.Instance.AddAObject(map, map.AddFrame, 150.0);
             GraphicMap.mapShader.Parameters["ViewportSize"].SetValue(GameConfiguration.ScreenResolution);
             map.clearLoadData();
 
