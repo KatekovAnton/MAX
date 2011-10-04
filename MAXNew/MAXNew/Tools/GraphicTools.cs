@@ -43,6 +43,16 @@ namespace MAXNew.Tools
             palshiftu(thepal, 123, 127);
         }
 
+        public static Texture2D TextureIndexedFromIndexes(int w, int h, byte[] indexes)
+        {
+            Texture2D result = new Texture2D(Game1.device, w, h, false, SurfaceFormat.Color);
+            int[] datares = new int[indexes.Length];
+            for (int i = 0; i < datares.Length; i++)
+                datares[i] = (int)indexes[i];
+            result.SetData(datares);
+            return result;
+        }
+
         public static Texture2D TextureFromIndexAndPalette(int w, int h, byte[] indexes, byte[] palette)
         {
             Texture2D result = new Texture2D(Game1.device, w, h, false, SurfaceFormat.Color);

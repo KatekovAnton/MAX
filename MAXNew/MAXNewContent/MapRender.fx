@@ -10,7 +10,7 @@
 float2   ViewportSize    : register(c0);
 float4x4 MatrixTransform : register(c2);
 sampler  TextureSampler  : register(s0);
-
+sampler  Palette  : register(s0);
 
 #ifdef XBOX360
 
@@ -108,11 +108,26 @@ void SpriteVertexShader(inout float4 position : POSITION0,
 
 #endif
 
+const float4 mask = float4(1.0/255.0,1.0/255.0,1.0/255.0,0.0);
+const float4 decode_mask = float4(1.0f, 1.0/255.0, 1.0/65025.0, 1.0/16581375.0);
 
-// Pixel shader for rendering sprites (shared between Windows and Xbox).
-void SpritePixelShader(inout float4 color : COLOR0, float2 texCoord : TEXCOORD0)
+inline float4 FloatToFloat4( float v )
 {
-    color = tex2D(TextureSampler, texCoord);
+    float4 enc = float4(1.0, 255.0, 65025.0, 16581375.0) * v;
+    enc = frac(enc);
+    enc -= enc.yzww * mask;
+    return enc;
+}
+
+inline float Float4ToFloat( float4 rgba )
+{
+    return dot( rgba, decode_mask );
+}
+
+//pixel shader
+float4 SpritePixelShader(float2 texCoord : TEXCOORD0):COLOR0
+{
+	return tex2D(TextureSampler, texCoord).r;
 }
 
 

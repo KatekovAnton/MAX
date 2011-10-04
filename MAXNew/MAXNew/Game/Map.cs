@@ -38,7 +38,7 @@ namespace MAXNew.Game
         {
             SpriteBatch spr = GraphicMap.mapSprite;
             Camera cam = Game1.camera;
-            
+            //GraphicMap.mapShader.Parameters["Palette"].SetValue(mapDraw.palette);
             spr.Begin(SpriteSortMode.Deferred,BlendState.Opaque,SamplerState.PointClamp,DepthStencilState.None,RasterizerState.CullNone,GraphicMap.mapShader);
             float dx = 0;
             float dy = 64 * cam.visibleMapCELLBounds.Y;
