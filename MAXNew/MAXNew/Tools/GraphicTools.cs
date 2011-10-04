@@ -28,19 +28,36 @@ namespace MAXNew.Tools
 
         public static void animatePalette(Color[] thepal)
         {
-            palshiftd(thepal, 9, 12);
-            palshiftu(thepal, 13, 16);
-            palshiftu(thepal, 17, 20);
-            palshiftu(thepal, 21, 24);
+            palshiftd(thepal, 9, 12);//3
+            palshiftu(thepal, 13, 16);//3
+            palshiftu(thepal, 17, 20);//3
+            palshiftu(thepal, 21, 24);//3
 
-            palshiftu(thepal, 25, 30);
+            palshiftu(thepal, 25, 30);//5
             //palblnkd(thepal, 31, 1 - frac(gct), gclgreen);
 
-            palshiftu(thepal, 96, 102);
-            palshiftu(thepal, 103, 109);
-            palshiftu(thepal, 110, 116);
-            palshiftu(thepal, 117, 122);
-            palshiftu(thepal, 123, 127);
+            palshiftu(thepal, 96, 102);//6
+            palshiftu(thepal, 103, 109);//6
+            palshiftu(thepal, 110, 116);//6
+            palshiftu(thepal, 117, 122);//5
+            palshiftu(thepal, 123, 127);//4
+        }
+
+        public static Texture2D[] CreatePalette(byte[] palette)
+        {
+            //30
+            Color[] colors = new Color[256];
+            for (int i = 0; i < colors.Length; i++)
+                colors[i] = new Microsoft.Xna.Framework.Color(palette[i * 3], palette[i * 3 + 1], palette[i * 3 + 2]);
+            Texture2D[] result = new Texture2D[30];
+            for(int i = 0;i<30;i++)
+            {
+                result[i] = new Texture2D(Game1.device, 256, 1);
+                result[i].SetData(colors);
+                if (i != 29)
+                    GraphicTools.animatePalette(colors);
+            }
+            return result;
         }
 
         public static Texture2D TextureIndexedFromIndexes(int w, int h, byte[] indexes)

@@ -97,6 +97,7 @@ namespace MAXNew
 
             map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Snow_3.wrl");
             map.mapDraw = new GraphicMap(map);
+            Animator.Instance.AddAObject(map.AddFrame, 150.0);
             GraphicMap.mapShader.Parameters["ViewportSize"].SetValue(GameConfiguration.ScreenResolution);
             map.clearLoadData();
 
@@ -140,6 +141,7 @@ bool lf = true;
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            Animator.Instance.Update(gameTime);
             mouseManager.Update();
             // TODO: Add your update logic here
             FPSCounter.Update(gameTime);

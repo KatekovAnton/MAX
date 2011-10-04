@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animator.cs" />
     <Compile Include="Config\GameConfiguration.cs" />
     <Compile Include="Config\SystemConfiguration.cs" />
     <Compile Include="Game\Camera.cs" />

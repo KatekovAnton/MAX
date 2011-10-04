@@ -10,7 +10,13 @@
 float2   ViewportSize    : register(c0);
 float4x4 MatrixTransform : register(c2);
 sampler  TextureSampler  : register(s0);
-sampler  Palette  : register(s0);
+uniform extern texture PaletteTexture;
+
+sampler PaletteSampler = sampler_state
+{
+	Texture = <PaletteTexture>;
+	mipfilter = POINT;
+};
 
 #ifdef XBOX360
 
@@ -127,7 +133,8 @@ inline float Float4ToFloat( float4 rgba )
 //pixel shader
 float4 SpritePixelShader(float2 texCoord : TEXCOORD0):COLOR0
 {
-	return tex2D(TextureSampler, texCoord).r;
+	float number = tex2D(TextureSampler, texCoord).r*256;
+	return tex2D(PaletteSampler, float2(number/256.0, 0));
 }
 
 

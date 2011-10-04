@@ -16,7 +16,7 @@ namespace MAXNew.Game.Graphic
         public static SpriteBatch mapSprite;
         public Texture2D minimap;
         public Texture2D mapElementsSingle;
-        public Texture2D palette;
+        public Texture2D[] palette;
         public Microsoft.Xna.Framework.Rectangle[] rectangles;
         public GraphicMap(Map map)
         {
@@ -43,12 +43,8 @@ namespace MAXNew.Game.Graphic
                 rectangles[i].Width = 63;
                 rectangles[i].Height = 63;
             }
-            palette = new Texture2D(Game1.device, 256, 1);
-            uint[] colors = new uint[256];
-            for (int i = 0; i < colors.Length; i++)
-                colors[i] = new Microsoft.Xna.Framework.Color(map.palette[i * 3], map.palette[i * 3 + 1], map.palette[i * 3 + 2]).PackedValue;
-            palette.SetData(colors);
-
+            
+            palette = GraphicTools.CreatePalette(map.palette);
             mapElementsSingle = GraphicTools.TextureIndexedFromIndexes(64 * w, 64 * h, singleArray);
         }
     }

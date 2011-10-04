@@ -23,7 +23,8 @@ namespace MAXNew.Game
         public byte[][] mapElements;
         public byte[] minimap;
         public byte[] palette;
-       
+
+        int fame = 0;
 
         public GraphicMap mapDraw;
 
@@ -38,7 +39,7 @@ namespace MAXNew.Game
         {
             SpriteBatch spr = GraphicMap.mapSprite;
             Camera cam = Game1.camera;
-            //GraphicMap.mapShader.Parameters["Palette"].SetValue(mapDraw.palette);
+            GraphicMap.mapShader.Parameters["PaletteTexture"].SetValue(mapDraw.palette[fame]);
             spr.Begin(SpriteSortMode.Deferred,BlendState.Opaque,SamplerState.PointClamp,DepthStencilState.None,RasterizerState.CullNone,GraphicMap.mapShader);
             float dx = 0;
             float dy = 64 * cam.visibleMapCELLBounds.Y;
@@ -64,6 +65,15 @@ namespace MAXNew.Game
             }
 
             spr.End();
+
+
+        }
+
+        public void AddFrame()
+        {
+            fame++;
+            if (fame == 30)
+                fame = 0;
         }
     }
 }
