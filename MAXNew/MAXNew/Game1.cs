@@ -95,7 +95,7 @@ namespace MAXNew
             
             mouseManager = new MouseManager();
 
-            map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Crater_5.wrl");
+            map = Tools.MaxRes.loadWrl(SystemConfiguration.AppPath + "\\data\\maps\\Snow_5.wrl");
             map.mapDraw = new GraphicMap(map);
             Animator.Instance.AddAObject(map, map.AddFrame, 150.0);
             GraphicMap.mapShader.Parameters["ViewportSize"].SetValue(GameConfiguration.ScreenResolution);
@@ -207,14 +207,25 @@ bool lf = true;
             GraphicsDevice.BlendState = BlendState.Opaque;
             // TODO: Add your drawing code here
             map.draw();
-            spriteBatch.Begin();
+
 
             Vector2 pos = new Vector2(100, 100);
-            spriteBatch.Draw(alienTank.textures[index], pos - alienTank.frames[index].centerDelta + GameConfiguration.halfCell, Color.White);
+          //RasterizerState oldstate = GraphicsDevice.RasterizerState;
+          //RasterizerState newstate = new RasterizerState();
+          //newstate.ScissorTestEnable = true;
+          //GraphicsDevice.RasterizerState = newstate;
+
+            GraphicsDevice.ScissorRectangle = new Rectangle(0, 0, 107, 200);
+
+            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, newstate);
+            spriteBatch.Begin();
+            spriteBatch.Draw(alienTank.textures[index],
+                pos - alienTank.frames[index].centerDelta + GameConfiguration.halfCell, 
+                Color.White);
             spriteBatch.DrawString(font1, string.Format("FPS: {0} Frame time: {1}", FPSCounter.FramesPerSecond, FPSCounter.FrameTime), Vector2.Zero, Color.White);
             spriteBatch.DrawString(font1, string.Format("scale: {0}", camera.scale), Vector2.Zero + new Vector2(0,20), Color.White);
             spriteBatch.End();
-
+            //GraphicsDevice.RasterizerState = oldstate;
             base.Draw(gameTime);
         }
     }
