@@ -12,7 +12,16 @@ namespace MAXNew.UI
 {
     public sealed class UIStaticInfo
     {
-        public static UIStaticInfo Instance = new UIStaticInfo();
+        private static UIStaticInfo instance;
+        public static UIStaticInfo Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new UIStaticInfo();
+                return instance;
+            }
+        }
         public RasterizerState scissorEnabledState
         {
             get;
@@ -23,12 +32,14 @@ namespace MAXNew.UI
             get;
             private set;
         }
+        public SpriteBatch spriteBatch;
 
         protected UIStaticInfo() 
         {
             scissorDisabledState = new RasterizerState();
             scissorEnabledState = new RasterizerState();
             scissorEnabledState.ScissorTestEnable = true;
+            spriteBatch = new SpriteBatch(UIManager.Instance.mainDevice);
         }
     }
 }

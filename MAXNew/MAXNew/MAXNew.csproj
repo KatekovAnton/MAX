@@ -127,8 +127,11 @@
     <Compile Include="TextureCache\MAXRESImageProvider.cs" />
     <Compile Include="UI\UIControl.cs" />
     <Compile Include="UI\UIImageCache.cs" />
+    <Compile Include="UI\UIImagePart.cs" />
     <Compile Include="UI\UIInputManager.cs" />
     <Compile Include="UI\UIManager.cs" />
+    <Compile Include="UI\UIRootControl.cs" />
+    <Compile Include="UI\UISprite.cs" />
     <Compile Include="UI\UIStaticInfo.cs" />
   </ItemGroup>
   <ItemGroup>

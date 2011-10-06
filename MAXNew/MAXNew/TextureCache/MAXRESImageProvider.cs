@@ -77,7 +77,6 @@ namespace MAXNew.TextureCache
 
         private void maxresunpak(string from)
         {
-            
             System.IO.FileStream str1 = new System.IO.FileStream(from, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
 
             inf = new System.IO.BinaryReader(str1);
@@ -92,6 +91,11 @@ namespace MAXNew.TextureCache
             for (int f = 0; f < dir.Length; f++)
             {
                 dir[f].name = new string( inf.ReadChars(8));
+                if (dir[f].name.IndexOf('6') != -1)
+                {
+                    int a = 0;
+                    a++;
+                }
                 dir[f].offset = inf.ReadInt32();
                 dir[f].size = inf.ReadInt32();
             }
@@ -206,7 +210,7 @@ namespace MAXNew.TextureCache
             target.textures[index] = MAXNew.Tools.GraphicTools.TextureFromIndexAndDefaultPalette(width, height, pixels);
         }
 
-        public MAXNew.Game.Graphic.GraphicUnit convertMultiImage(BinaryReader inf, int length)
+        private MAXNew.Game.Graphic.GraphicUnit convertMultiImage(BinaryReader inf, int length)
         {
             long baseOffset = inf.BaseStream.Position;
             byte[] buf = inf.ReadBytes(length);

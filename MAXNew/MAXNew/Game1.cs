@@ -35,6 +35,10 @@ namespace MAXNew
         //camera
         public static Camera camera;
 
+        //user interface
+        public UI.UIManager userInterface;
+
+
         //resources
         MAXNew.TextureCache.MAXRESImageProvider textures;
         GraphicUnit alienTank;
@@ -99,7 +103,9 @@ namespace MAXNew
 
             alienTank = textures.loadMultiImage("AIREXPLD");
             camera = new Camera(map);
-            
+            userInterface = new UI.UIManager(Game1.device);
+         //   UI.UISprite spr = new UI.UISprite(textures.loadPalettedImage("ENDGAME6"));
+          //  userInterface.maincontrol.AddChild(spr);
         }
 
 
@@ -201,6 +207,9 @@ bool lf = true;
           //  GraphicsDevice.ScissorRectangle = new Rectangle(0, 0, 107, 200);
 
             //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, newstate);
+
+            userInterface.Draw();
+
             spriteBatch.Begin();
             spriteBatch.Draw(alienTank.textures[index],
                 pos - alienTank.frames[index].centerDelta + GameConfiguration.halfCell, 

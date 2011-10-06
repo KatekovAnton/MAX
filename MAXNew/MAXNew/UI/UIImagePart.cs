@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MAXNew.TextureCache
+namespace MAXNew.UI
 {
-    public class CashedTexture2D
+    public class UIImagePart
     {
         public Texture2D texture;
-        public int userCount = 0;
-        public CashedTexture2D(Texture2D _texture)
+        public Rectangle? sourceRct;
+        public UIImagePart(Texture2D _texture, Rectangle? _sourceRct)
         {
             texture = _texture;
-        }
-        ~CashedTexture2D()
-        {
-            texture.Dispose();
+            sourceRct = _sourceRct;
         }
     }
 }
