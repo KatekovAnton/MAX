@@ -115,6 +115,8 @@
     <Compile Include="Game\Graphic\GraphicMap.cs" />
     <Compile Include="Game\Map.cs" />
     <Compile Include="Helpers\MouseManager.cs" />
+    <Compile Include="MyContainer.cs" />
+    <Compile Include="TextureCache\CachedTexture2D.cs" />
     <Compile Include="Tools\GraphicTools.cs" />
     <Compile Include="Game\Graphic\GraphicUnit.cs" />
     <Compile Include="Helpers\FpsCounter.cs" />
@@ -122,6 +124,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Tools\MaxRes.cs" />
+    <Compile Include="TextureCache\MAXRESImageProvider.cs" />
+    <Compile Include="UI\UIControl.cs" />
+    <Compile Include="UI\UIImageCache.cs" />
+    <Compile Include="UI\UIInputManager.cs" />
+    <Compile Include="UI\UIManager.cs" />
+    <Compile Include="UI\UIStaticInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -247,6 +255,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\maps\Snow_6.wrl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\Max.res">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\rules.cfg">
