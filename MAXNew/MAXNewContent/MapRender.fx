@@ -133,8 +133,8 @@ inline float Float4ToFloat( float4 rgba )
 //pixel shader
 float4 SpritePixelShader(float2 texCoord : TEXCOORD0):COLOR0
 {
-	float number = tex2D(TextureSampler, texCoord).r*256;
-	return tex2D(PaletteSampler, float2(number/256.0, 0));
+	float number = tex2D(TextureSampler, texCoord).r;
+	return tex2D(PaletteSampler, float2(number, 0));
 }
 
 

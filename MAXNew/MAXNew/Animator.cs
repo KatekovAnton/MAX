@@ -25,6 +25,7 @@ namespace MAXNew
             aobjects.Add(new AnimatedObject(act, freq, key));
         }
     }
+
     public class AnimatedObject
     {
         public Action action;
@@ -35,7 +36,7 @@ namespace MAXNew
         {
             this.action = _action;
             updateFreq = _updateFreq;
- key = _key;
+            key = _key;
         }
         public void Update(GameTime gtime)
         {
