@@ -18,13 +18,14 @@ namespace MAXNew.UI
         private Dictionary<string, UIControl> childByNames;
 
 
-        protected Rectangle? scissorRect;
-        protected Rectangle? destinationRect;
-        protected Vector2 position = Vector2.Zero;
-        protected Vector2 origin = Vector2.Zero;
-        protected Color color = Color.White;
-        protected Vector2 scale = new Vector2(1, 1);
+        public Rectangle? scissorRect;
+        public Rectangle? destinationRect;
+        public Vector2 position = Vector2.Zero;
+        public Vector2 origin = Vector2.Zero;
+        public Color color = Color.White;
+        public Vector2 scale = new Vector2(1, 1);
 
+        
 
         protected DrawDelegate drawMethod;
 
@@ -41,21 +42,32 @@ namespace MAXNew.UI
                 child.Draw(position+this.position);
         }
 
-        public void AddChild(UIControl child)
+        public virtual void AddChild(UIControl child)
         {
+            if (child.parent != null)
+                throw new Exception("You are trying to add already added control");
             if (!childrens.Contains(child))
+            {
                 childrens.Add(child);
+                child.parent = this;
+            }
         }
 
-        public void AddChild(UIControl child, string name)
+
+        public virtual void AddChild(UIControl child, string name)
         {
+            if (child.parent != null)
+                throw new Exception("You are trying to add already added control");
             if (!childrens.Contains(child))
             {
                 childrens.Add(child);
                 childByNames.Add(name, child);
             }
             else if (!childByNames.ContainsKey(name))
+            {
                 childByNames.Add(name, child);
+                child.parent = this;
+            }
         }
 
         public UIControl getChildByName(string name)

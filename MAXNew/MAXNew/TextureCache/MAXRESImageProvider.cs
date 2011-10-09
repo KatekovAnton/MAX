@@ -75,6 +75,11 @@ namespace MAXNew.TextureCache
             return convertMultiImage(inf, dir[index].size);
         }
 
+        public void clear()
+        {
+            inf.Close();
+        }
+        
         private void maxresunpak(string from)
         {
             System.IO.FileStream str1 = new System.IO.FileStream(from, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);

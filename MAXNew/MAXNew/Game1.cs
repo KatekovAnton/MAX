@@ -28,19 +28,19 @@ namespace MAXNew
         //mouse
         public static MouseManager mouseManager;
 
+        //camera
+        public static Camera camera;
+
         //fps and debug info
         public FpsCounter FPSCounter;
         public SpriteFont font1;
-
-        //camera
-        public static Camera camera;
 
         //user interface
         public UI.UIManager userInterface;
 
 
         //resources
-        MAXNew.TextureCache.MAXRESImageProvider textures;
+        MAXNew.TextureCache.MAXRESImageProvider maxres;
         GraphicUnit alienTank;
 
         public Map map;
@@ -101,7 +101,7 @@ namespace MAXNew
             map.clearLoadData();
 
 
-            alienTank = textures.loadMultiImage("AIREXPLD");
+            alienTank = maxres.loadMultiImage("AIREXPLD");
             camera = new Camera(map);
             userInterface = new UI.UIManager(Game1.device);
          //   UI.UISprite spr = new UI.UISprite(textures.loadPalettedImage("ENDGAME6"));
@@ -115,7 +115,7 @@ namespace MAXNew
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicMap.mapSprite = new SpriteBatch(GraphicsDevice);
 
-            textures = new TextureCache.MAXRESImageProvider();
+            maxres = new TextureCache.MAXRESImageProvider();
             GraphicMap.mapShader = Content.Load<Effect>("MapRender");
             font1 = Content.Load<SpriteFont>("SpriteFont1");
             // TODO: use this.Content to load your game content here
@@ -124,6 +124,7 @@ namespace MAXNew
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            maxres.clear();
         }
 int index = 13;
 bool lf = true;

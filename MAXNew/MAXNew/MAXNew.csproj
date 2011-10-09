@@ -130,6 +130,8 @@
     <Compile Include="UI\UIImagePart.cs" />
     <Compile Include="UI\UIInputManager.cs" />
     <Compile Include="UI\UIManager.cs" />
+    <Compile Include="UI\UIMenu.cs" />
+    <Compile Include="UI\UIMenuItem.cs" />
     <Compile Include="UI\UIRootControl.cs" />
     <Compile Include="UI\UISprite.cs" />
     <Compile Include="UI\UIStaticInfo.cs" />
