@@ -104,6 +104,150 @@ namespace MAXNew.TextureCache
                 dir[f].offset = inf.ReadInt32();
                 dir[f].size = inf.ReadInt32();
             }
+
+
+         /*  for (int f = 0; f < dir.Length; f++)
+            {
+	 	
+                inf.BaseStream.Seek(Convert.ToInt64(dir[f].offset), SeekOrigin.Begin);
+                string filename = SystemConfiguration.AppPath + "\\unpacked\\raw\\" + dir[f].name;
+	
+                filename = filename.TrimEnd('\0');
+                if (System.IO.File.Exists(filename))
+                    System.IO.File.Delete(filename);
+	 	
+                System.IO.FileStream strCur = new System.IO.FileStream(filename, (System.IO.File.Exists(filename) ? System.IO.FileMode.Create : 0) | System.IO.FileMode.CreateNew);
+                System.IO.BinaryWriter bw = new System.IO.BinaryWriter(strCur);
+	 	
+                byte[] data = inf.ReadBytes(dir[f].size);
+	 	
+                bw.Write(data);
+                bw.Flush();
+                bw.Close();
+           }*/
+            
+          /* for (int f = 1025; f < dir.Length; f++)
+            {
+                string filename = SystemConfiguration.AppPath + "\\unpacked\\raw\\" + dir[f].name;
+	
+                filename = filename.TrimEnd('\0');
+                
+                FileStream str11 = new FileStream(filename, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+                BinaryReader inf1 = new BinaryReader(str11);
+                int f1 = inf1.ReadInt32();
+                inf1.Close();
+                inf1 = null;
+                str11 = null;
+                if (f1 == 0)
+                    savePalettedImage(filename);
+                else
+                    saveSimpleImage(filename);
+                
+           }*/
+        }
+
+        private void savePalettedImage(string name)
+        {
+            FileStream str1 = new FileStream(name, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+            BinaryReader inf = new BinaryReader(str1);
+            if (inf.BaseStream.Length == 0)
+            {
+                inf.Close();
+                return;
+            }
+            int f = inf.ReadInt32();
+
+            if (f != 0)
+            {
+                inf.Close();
+                return;
+            }
+
+            short w = inf.ReadInt16();
+            short h = inf.ReadInt16();
+
+            byte[] pixels = new byte[w * h];
+            byte[] pallete = inf.ReadBytes(pal_size);
+            MemoryStream dest = new MemoryStream(pixels);
+            short block_size;
+            byte buf;
+            byte[] fill;
+            short m1 = -1;
+
+            while (dest.Position < dest.Length)
+            {
+                block_size = inf.ReadInt16();
+                if (block_size > 0)
+                    dest.Write(inf.ReadBytes(block_size), 0, block_size);
+                else
+                {
+                    block_size = Convert.ToInt16((int)m1 * (int)block_size);
+
+                    buf = inf.ReadByte();
+                    fill = new byte[block_size];
+
+                    for (int i = 0; i < block_size; i++)
+                        fill[i] = buf; dest.Write(fill, 0, fill.Length);
+                }
+            }
+
+            System.Drawing.Bitmap bt = new System.Drawing.Bitmap(w, h);
+
+            for (int i = 0; i < w; i++)
+                for (int j = 0; j < h; j++)
+                {
+                    int colornumber = pixels[j * w + i];
+                    bt.SetPixel(i, j, System.Drawing.Color.FromArgb(pallete[colornumber * 3], pallete[colornumber * 3 + 1], pallete[colornumber * 3 + 2]));
+                }
+            string newName = name.Replace("\\raw", "\\bitmaps") + ".png";
+            bt.Save(newName, System.Drawing.Imaging.ImageFormat.Png);
+        }
+
+        private void saveSimpleImage(string name)
+        {
+            System.IO.FileStream str1 = new System.IO.FileStream(name, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+
+            BinaryReader source = new System.IO.BinaryReader(str1);
+            if (source.BaseStream.Length == 0)
+            {
+                source.Close();
+                return;
+            }
+
+            ushort width = source.ReadUInt16();
+            ushort height = source.ReadUInt16();
+
+            if ((width > 640 || height > 480) || (width * height == 0))
+            {
+                source.Close();
+                return;
+            }
+
+
+
+            short center_x = source.ReadInt16();
+            short center_y = source.ReadInt16();
+
+
+
+            int img_size = width * height;
+
+            byte[] pixels = source.ReadBytes(img_size);
+            System.Drawing.Bitmap bt = new System.Drawing.Bitmap(width, height);
+            for (int i = 0; i < width; i++)
+                for (int j = 0; j < height; j++)
+                {
+                    int pixelnumber = j * Convert.ToInt32(width) + i;
+                    int colornumber = pixels[pixelnumber];
+                    bt.SetPixel(i, j, System.Drawing.Color.FromArgb(
+                        MAXNew.Tools.Palette.default_palette[colornumber][0],
+                        MAXNew.Tools.Palette.default_palette[colornumber][1],
+                        MAXNew.Tools.Palette.default_palette[colornumber][2]));
+                }
+
+
+            string d = name.Replace("\\raw", "\\bitmaps") + ".png";
+            bt.Save(d, System.Drawing.Imaging.ImageFormat.Png);
         }
 
         ~MAXRESImageProvider()
