@@ -41,14 +41,15 @@ namespace MAXNew
 
         //resources
         MAXNew.TextureCache.MAXRESImageProvider maxres;
-        GraphicUnit alienTank;
+        GraphicUnit AIREXPLD;
 
         public Map map;
 
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+        int index = 13;
+        bool lf = true;
 
         public Game1()
         {
@@ -101,7 +102,7 @@ namespace MAXNew
             map.clearLoadData();
 
 
-            alienTank = maxres.loadMultiImage("AIREXPLD");
+            AIREXPLD = maxres.loadMultiImage("AIREXPLD");
             camera = new Camera(map);
             userInterface = new UI.UIManager(Game1.device);
          //   UI.UISprite spr = new UI.UISprite(textures.loadPalettedImage("ENDGAME6"));
@@ -119,6 +120,7 @@ namespace MAXNew
             GraphicMap.mapShader = Content.Load<Effect>("MapRender");
             font1 = Content.Load<SpriteFont>("SpriteFont1");
             // TODO: use this.Content to load your game content here
+ 
         }
 
         protected override void UnloadContent()
@@ -126,8 +128,6 @@ namespace MAXNew
             // TODO: Unload any non ContentManager content here
             maxres.clear();
         }
-int index = 13;
-bool lf = true;
 
         protected override void Update(GameTime gameTime)
         {
@@ -140,7 +140,7 @@ bool lf = true;
             {
                 lf = false;
                 index++;
-                if (index == alienTank.frames.Length)
+                if (index == AIREXPLD.frames.Length)
                     index = 0;
             }
             if (ks.IsKeyUp(Keys.L))
@@ -212,8 +212,8 @@ bool lf = true;
             userInterface.Draw();
 
             spriteBatch.Begin();
-            spriteBatch.Draw(alienTank.textures[index],
-                pos - alienTank.frames[index].centerDelta + GameConfiguration.halfCell, 
+            spriteBatch.Draw(AIREXPLD.textures[index],
+                pos - AIREXPLD.frames[index].centerDelta + GameConfiguration.halfCell, 
                 Color.White);
             spriteBatch.DrawString(font1, string.Format("FPS: {0} Frame time: {1}", FPSCounter.FramesPerSecond, FPSCounter.FrameTime), Vector2.Zero, Color.White);
             spriteBatch.DrawString(font1, string.Format("scale: {0}", camera.scale), Vector2.Zero + new Vector2(0,20), Color.White);

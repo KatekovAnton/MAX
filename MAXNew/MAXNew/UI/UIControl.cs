@@ -13,15 +13,32 @@ namespace MAXNew.UI
     public delegate void DrawDelegate(SpriteBatch sb, Vector2 position);
     public abstract class UIControl
     {
+        public int level;
+
         private UIControl parent = null;
         private MyContainer<UIControl> childrens;
         private Dictionary<string, UIControl> childByNames;
 
-
+        public Rectangle controlZone;
         public Rectangle? scissorRect;
         public Rectangle? destinationRect;
-        public Vector2 position = Vector2.Zero;
-        public Vector2 origin = Vector2.Zero;
+        private Vector2 position = Vector2.Zero;
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+                controlZone.X = (int)position.X;
+                controlZone.Y = (int)position.Y;
+            }
+        }
+
+        protected Vector2 origin = Vector2.Zero;
+
         public Color color = Color.White;
         public Vector2 scale = new Vector2(1, 1);
 
@@ -29,8 +46,9 @@ namespace MAXNew.UI
 
         protected DrawDelegate drawMethod;
 
-        protected UIControl()
+        protected UIControl(Rectangle zone)
         {
+            controlZone = zone;
             childrens = new MyContainer<UIControl>(10, 1);
             childByNames = new Dictionary<string, UIControl>();
         }
@@ -50,6 +68,7 @@ namespace MAXNew.UI
             {
                 childrens.Add(child);
                 child.parent = this;
+                child.level = level + 1;
             }
         }
 
@@ -61,13 +80,13 @@ namespace MAXNew.UI
             if (!childrens.Contains(child))
             {
                 childrens.Add(child);
+                child.parent = this;
                 childByNames.Add(name, child);
+                child.level = level + 1;
             }
             else if (!childByNames.ContainsKey(name))
-            {
                 childByNames.Add(name, child);
-                child.parent = this;
-            }
+            
         }
 
         public UIControl getChildByName(string name)

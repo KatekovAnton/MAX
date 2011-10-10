@@ -10,7 +10,11 @@ namespace MAXNew.UI
 {
     public class UIRootControl:UIControl
     {
+
+
+
         public UIRootControl()
+            : base(new Rectangle(0, 0, GameConfiguration.ScreenBounds.Width, GameConfiguration.ScreenBounds.Height))
         {
             drawMethod = Draw;
         }
