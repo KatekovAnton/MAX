@@ -10,7 +10,7 @@ namespace MAXNew.UI
 {
     public class UIRootControl:UIControl
     {
-
+        public static MyContainer<UIMenu> menus = new MyContainer<UIMenu>();
 
 
         public UIRootControl()
