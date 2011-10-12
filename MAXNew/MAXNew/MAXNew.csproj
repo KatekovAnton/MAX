@@ -116,7 +116,8 @@
     <Compile Include="Game\Map.cs" />
     <Compile Include="Helpers\MouseManager.cs" />
     <Compile Include="MyContainer.cs" />
-    <Compile Include="TextureCache\CachedTexture2D.cs" />
+    <Compile Include="ResourceProviders\CachedTexture2D.cs" />
+    <Compile Include="ResourceProviders\XNAFontProvider.cs" />
     <Compile Include="Tools\GraphicTools.cs" />
     <Compile Include="Game\Graphic\GraphicUnit.cs" />
     <Compile Include="Helpers\FpsCounter.cs" />
@@ -124,10 +125,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Tools\MaxRes.cs" />
-    <Compile Include="TextureCache\MAXRESImageProvider.cs" />
+    <Compile Include="ResourceProviders\MAXRESImageProvider.cs" />
+    <Compile Include="UI\UIMenuItemButton.cs" />
     <Compile Include="UI\UIControl.cs" />
-    <Compile Include="UI\UIImageCache.cs" />
-    <Compile Include="UI\UIImagePart.cs" />
+    <Compile Include="UI\UIControlController.cs" />
+    <Compile Include="ResourceProviders\ImageCache.cs" />
+    <Compile Include="ResourceProviders\ImagePart.cs" />
     <Compile Include="UI\UIInputManager.cs" />
     <Compile Include="UI\UIManager.cs" />
     <Compile Include="UI\UIMenu.cs" />

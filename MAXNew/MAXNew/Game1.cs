@@ -15,6 +15,8 @@ using MAXNew.Helpers;
 using MAXNew.Game;
 using MAXNew.Game.Graphic;
 
+using MAXNew.ResourceProviders;
+
 namespace MAXNew
 {
     /// <summary>
@@ -33,14 +35,15 @@ namespace MAXNew
 
         //fps and debug info
         public FpsCounter FPSCounter;
-        public SpriteFont font1;
 
         //user interface
         public UI.UIManager userInterface;
 
 
         //resources
-        MAXNew.TextureCache.MAXRESImageProvider maxres;
+        MAXNew.ResourceProviders.MAXRESImageProvider maxres;
+        MAXNew.ResourceProviders.ImageCache images;
+        MAXNew.ResourceProviders.XNAFontProvider fonts;
         GraphicUnit AIREXPLD;
 
         public Map map;
@@ -105,7 +108,10 @@ namespace MAXNew
             AIREXPLD = maxres.loadMultiImage("AIREXPLD");
             camera = new Camera(map);
             userInterface = new UI.UIManager(Game1.device);
-         //   UI.UISprite spr = new UI.UISprite(textures.loadPalettedImage("ENDGAME6"));
+            
+           // CashedTexture2D t2d = ImageCache.Instance.getImage("ENDGAME6",TextureType.Paletted);
+           // t2d.userCount++;
+           // UI.UISprite spr = new UI.UISprite(t2d);
           //  userInterface.maincontrol.AddChild(spr);
         }
 
@@ -116,9 +122,9 @@ namespace MAXNew
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicMap.mapSprite = new SpriteBatch(GraphicsDevice);
 
-            maxres = new TextureCache.MAXRESImageProvider();
+            maxres = new ResourceProviders.MAXRESImageProvider();
             GraphicMap.mapShader = Content.Load<Effect>("MapRender");
-            font1 = Content.Load<SpriteFont>("SpriteFont1");
+            fonts = new ResourceProviders.XNAFontProvider(Content);
             // TODO: use this.Content to load your game content here
  
         }
@@ -184,6 +190,8 @@ namespace MAXNew
             }
             if (needMove || needupdate)
                 camera.UpdateFinalInfo();
+
+            userInterface.Update();
             base.Update(gameTime);
         }
 
@@ -215,8 +223,8 @@ namespace MAXNew
             spriteBatch.Draw(AIREXPLD.textures[index],
                 pos - AIREXPLD.frames[index].centerDelta + GameConfiguration.halfCell, 
                 Color.White);
-            spriteBatch.DrawString(font1, string.Format("FPS: {0} Frame time: {1}", FPSCounter.FramesPerSecond, FPSCounter.FrameTime), Vector2.Zero, Color.White);
-            spriteBatch.DrawString(font1, string.Format("scale: {0}", camera.scale), Vector2.Zero + new Vector2(0,20), Color.White);
+            spriteBatch.DrawString(XNAFontProvider.CourierNew12RegularBold, string.Format("FPS: {0} Frame time: {1}", FPSCounter.FramesPerSecond, FPSCounter.FrameTime), Vector2.Zero, Color.White);
+            spriteBatch.DrawString(XNAFontProvider.CourierNew12RegularBold, string.Format("scale: {0}", camera.scale), Vector2.Zero + new Vector2(0, 20), Color.White);
             spriteBatch.End();
             //GraphicsDevice.RasterizerState = oldstate;
             base.Draw(gameTime);
