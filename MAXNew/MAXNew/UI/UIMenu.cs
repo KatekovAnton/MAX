@@ -30,6 +30,7 @@ namespace MAXNew.UI
             if (test != null)
                 base.AddChild(child);
         }
+
         public override void AddChild(UIControl child, string name)
         {
             UIMenu test1 = child as UIMenu;
@@ -56,9 +57,9 @@ namespace MAXNew.UI
             return false;
         }
 
-        public void Update(UIMenuItemState state)
+        public void Update(UIMenuItemInputState itenState, bool toSameObject)
         {
-            receiver.Update(state);
+            receiver.Update(itenState, toSameObject);
         }
 
         protected override void DisposeSelf()

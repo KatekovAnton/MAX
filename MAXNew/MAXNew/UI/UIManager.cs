@@ -43,7 +43,6 @@ namespace MAXNew.UI
         public UIMenuItem mouseOvnerItem;
         public void Update()
         {
-
             if (!(Game1.mouseManager.lmbState == Microsoft.Xna.Framework.Input.ButtonState.Pressed || Game1.mouseManager.isJustReleased))//мышка не нажата и не отпущена
             {
                 mouseOvnerItem = null;
@@ -51,15 +50,13 @@ namespace MAXNew.UI
                 return;
             }
 
-
-
-
+            Point mouseLocation = new Point((int)Game1.mouseManager.mousePos.X, (int)Game1.mouseManager.mousePos.Y);
             //мышка или нажата или токачто отпущена
             if (Game1.mouseManager.lmbState == Microsoft.Xna.Framework.Input.ButtonState.Pressed)//мышка нажата
             {
                 if (mouseOvnerItem == null && Game1.mouseManager.isJustPressed)//мышка токачто нажата - ищем в кого пошел тычок
                 {
-                    Point mouseLocation = new Point((int)Game1.mouseManager.mousePos.X, (int)Game1.mouseManager.mousePos.Y);
+
                     UIMenu topMenu = null;
                     foreach (UIMenu menu in menus)
                     {
@@ -80,16 +77,23 @@ namespace MAXNew.UI
                         mouseOvnerMenu = null;
                         return;
                     }
+                    //тут надо найти самое верхнее меню в которое пошел тык
                     //тычок кудато пошел
                     //определить куда пошел тычок
                     mouseOvnerItem = topMenu.GetChildInPoint(mouseLocation) as UIMenuItem;
                     mouseOvnerMenu = topMenu;
+
+                    mouseOvnerItem.Update(UIMenuItemInputState.pressed, true);
+
                     buffer.Clear();
                 }
                 else if (mouseOvnerItem == null && !Game1.mouseManager.isJustPressed) // мышка давно нажата и тычок никуда не пошел
                     return;
                 else if (mouseOvnerItem != null && !Game1.mouseManager.isJustPressed) // мышка давно нажата и тычок кудато пошел
-                    mouseOvnerItem.Update(UIMenuItemState.pressed);
+                    if (mouseOvnerItem.HavePoint(mouseLocation))
+                        mouseOvnerItem.Update(UIMenuItemInputState.pressed, true);
+                    else
+                        mouseOvnerItem.Update(UIMenuItemInputState.pressed, false);
 
             }
             else // отпущена
@@ -100,22 +104,17 @@ namespace MAXNew.UI
                     return;
                 else if (mouseOvnerItem != null && Game1.mouseManager.isJustReleased) // мышка токачто отпущена а тычок кудато шел
                 {
-                    Point mouseLocation = new Point((int)Game1.mouseManager.mousePos.X, (int)Game1.mouseManager.mousePos.Y);
                     //тычок кудато пришел
                     //и если пришел тудаже, то выполнить действия
                     if (mouseOvnerItem.HavePoint(mouseLocation))//тык пришел в этот объект
-                        mouseOvnerMenu.Update(UIMenuItemState.released);
-
+                        mouseOvnerItem.Update(UIMenuItemInputState.released, true);
+                    else
+                        mouseOvnerItem.Update(UIMenuItemInputState.released, false);
                     //обнуляем инфу
                     mouseOvnerItem = null;
                     mouseOvnerMenu = null;
                 }
             }
-
-
-
-
-
         }
     }
 }

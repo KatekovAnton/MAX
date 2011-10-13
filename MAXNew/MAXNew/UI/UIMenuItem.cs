@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace MAXNew.UI
 {
     public delegate void MenuItemAction(UIMenuItem sender);
-    public enum UIMenuItemState
+    public enum UIMenuItemInputState
         {
             pressed,
             released
@@ -20,14 +20,12 @@ namespace MAXNew.UI
 
         public MenuItemAction onMouseUp;
 
-        protected UIMenuItemState currentstate;
-        protected UIMenuItemState laststate;
-        protected UIControlController baseController;
-        public UIMenuItem(Rectangle zone, UIControlController basecontroller)
+        protected UIMenuItemInputState currentstate= UIMenuItemInputState.released;
+        protected UIMenuItemInputState laststate = UIMenuItemInputState.released;
+        public UIMenuItem(Rectangle zone, UIMenu baseMenu)
             : base(zone)
         {
-            baseController = basecontroller;
-            basecontroller.rootControl.AddChild(this);
+            baseMenu.AddChild(this);
         }
 
         public override void AddChild(UIControl child)
@@ -56,25 +54,27 @@ namespace MAXNew.UI
             base.AddChild(child, name);
         }
 
-        public void Update(UIMenuItemState actionType)
+        public void Update(UIMenuItemInputState actionType, bool isToThisObject)
         {
-            laststate = currentstate;
-            currentstate = actionType;
+            
 
-            if (currentstate != laststate)
+            if (actionType != laststate)
             {
-                if (currentstate == UIMenuItemState.pressed && laststate == UIMenuItemState.released)
-                    internalMouseDown();
-                else if (currentstate == UIMenuItemState.released && laststate == UIMenuItemState.pressed)
-                    internalMouseUp();
+                if (currentstate == UIMenuItemInputState.pressed && laststate == UIMenuItemInputState.released)
+                    internalMouseDown(isToThisObject);
+                else if (currentstate == UIMenuItemInputState.pressed && laststate == UIMenuItemInputState.pressed)
+                    internalMouseUp(isToThisObject);
             }
             else
-                if (currentstate == UIMenuItemState.pressed)
+                if (currentstate == UIMenuItemInputState.pressed)
                     internalMouseDrag();
+            
+            laststate = currentstate;
+            currentstate = actionType;
         }
 
-        protected abstract void internalMouseUp();
-        protected abstract void internalMouseDown();
+        protected abstract void internalMouseUp(bool hisAction);
+        protected abstract void internalMouseDown(bool hisAction);
         protected abstract void internalMouseDrag();
 
     }

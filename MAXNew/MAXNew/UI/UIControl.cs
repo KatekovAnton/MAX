@@ -19,8 +19,11 @@ namespace MAXNew.UI
         protected MyContainer<UIControl> childrens;
         protected Dictionary<string, UIControl> childByNames;
 
-        public Rectangle controlZone;
-        public Rectangle? scissorRect;
+        private Rectangle controlZone;
+        private Rectangle globalControlZone;
+
+        public bool useScissorrect = false;
+        public Rectangle scissorRect;
         public Rectangle? destinationRect;
         private Vector2 position = Vector2.Zero;
         public Vector2 Position
@@ -31,10 +34,29 @@ namespace MAXNew.UI
             }
             set
             {
-                position = value;
-                controlZone.X = (int)position.X;
-                controlZone.Y = (int)position.Y;
+                Vector2 delta = value - position;
+                Move(delta);
             }
+        }
+
+        public void Move(Vector2 delta)
+        {
+            position += delta;
+            controlZone.X += (int)delta.X;
+            controlZone.Y += (int)delta.Y;
+
+            globalControlZone.X += (int)delta.X;
+            globalControlZone.Y += (int)delta.Y;
+
+            if (useScissorrect)
+            {
+                scissorRect.X += (int)delta.X;
+                scissorRect.Y += (int)delta.Y;
+            }
+
+
+            foreach (UIControl child in childrens)
+                child.Move(delta);
         }
 
         protected Vector2 origin = Vector2.Zero;
@@ -49,13 +71,67 @@ namespace MAXNew.UI
         protected UIControl(Rectangle zone)
         {
             controlZone = zone;
+            globalControlZone = zone;
             childrens = new MyContainer<UIControl>(10, 1);
             childByNames = new Dictionary<string, UIControl>();
+            position = new Vector2(zone.X, zone.Y);
         }
 
-        public void Draw(Vector2 position)
+        public void SetControlZone(Rectangle zone)
         {
-            drawMethod(UIStaticInfo.Instance.spriteBatch, position);
+            Point delta = new Point(zone.X - controlZone.X, zone.Y - controlZone.Y);
+
+
+            controlZone = zone;
+            globalControlZone.X = parent.globalControlZone.X + controlZone.X;
+            globalControlZone.Y = parent.globalControlZone.Y + controlZone.Y;
+
+           
+            if (useScissorrect)
+            {
+                scissorRect.X += delta.X;
+                scissorRect.Y += delta.Y;
+            }
+
+            foreach (UIControl c in childrens)
+                c.SetParent(this);
+        }
+
+        public void SetParent(UIControl control)
+        {
+            Point delta;
+            if (control != null)
+            {
+                if (parent == null)
+                    delta = new Point(control.globalControlZone.X, control.globalControlZone.Y);
+                else
+                    delta = new Point(control.globalControlZone.X - parent.globalControlZone.X, control.globalControlZone.Y - parent.globalControlZone.Y);
+            }
+            else
+            {
+                if (parent == null)
+                    delta = new Point(0,0);
+                else
+                    delta = new Point(- parent.globalControlZone.X, -parent.globalControlZone.Y);
+            }
+            globalControlZone.X = controlZone.X + delta.X;
+            globalControlZone.Y = controlZone.Y + delta.Y;
+            parent = control;
+
+            if (useScissorrect)
+            {
+                scissorRect.X += delta.X;
+                scissorRect.Y += delta.Y;
+            }
+
+            foreach (UIControl c in childrens)
+                c.SetParent(this);
+        }
+
+        public virtual void Draw(Vector2 position)
+        {
+            if(drawMethod!=null)
+                drawMethod(UIStaticInfo.Instance.spriteBatch, position);
             foreach (UIControl child in childrens)
                 child.Draw(position+this.position);
         }
@@ -67,7 +143,7 @@ namespace MAXNew.UI
             if (!childrens.Contains(child))
             {
                 childrens.Add(child);
-                child.parent = this;
+                child.SetParent(this);
                 child.level = level + 1;
             }
         }
@@ -79,7 +155,7 @@ namespace MAXNew.UI
             if (!childrens.Contains(child))
             {
                 childrens.Add(child);
-                child.parent = this;
+                child.SetParent(this);
                 childByNames.Add(name, child);
                 child.level = level + 1;
             }
@@ -120,7 +196,7 @@ namespace MAXNew.UI
 
         public bool HavePoint(Point p)
         {
-            return controlZone.Contains(p);
+            return globalControlZone.Contains(p);
         }
 
         protected bool isDisposedSelf;

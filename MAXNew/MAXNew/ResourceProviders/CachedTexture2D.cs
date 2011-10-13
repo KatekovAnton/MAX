@@ -30,6 +30,7 @@ namespace MAXNew.ResourceProviders
             if (userCount == 0) 
                 ImageCache.Instance.RemoveImage(name);
         }
+
         ~CashedTexture2D()
         {
             if (!texture.IsDisposed)

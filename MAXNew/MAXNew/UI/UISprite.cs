@@ -15,15 +15,32 @@ namespace MAXNew.UI
         public ImagePart image;
         public UISprite(CashedTexture2D _tex):base(new Rectangle(0,0,_tex.texture.Width,_tex.texture.Height))
         {
-            image = new ImagePart(_tex, null);
-            drawMethod = DrawSelfMinimal;
+            ImagePart newimage = new ImagePart(_tex, null);
+            SetSpriteImage(newimage);
         }
 
         public UISprite(CashedTexture2D _tex, Rectangle _sourceRect, Vector2 _position)
             : base(new Rectangle((int)_position.X, (int)_position.Y, _sourceRect.Width, _sourceRect.Height))
         {
-            image = new ImagePart(_tex, _sourceRect);
-            drawMethod = DrawSelfPart;
+            ImagePart newimage = new ImagePart(_tex, _sourceRect);
+            SetSpriteImage(newimage);
+        }
+
+        public UISprite(ImagePart _tex, Vector2 _position)
+            : base(_tex.sourceRct != null ? new Rectangle((int)_position.X, (int)_position.Y, _tex.sourceRct.Value.Width, _tex.sourceRct.Value.Y) : new Rectangle((int)_position.X, (int)_position.Y, _tex.texture.texture.Width, _tex.texture.texture.Height))
+        {
+            SetSpriteImage(_tex);
+        }
+
+        public void SetSpriteImage(ImagePart newimage)
+        {
+            if (image != null && !image.disposed)
+                image.Dispose();
+            image = newimage;
+            if (image.sourceRct != null)
+                drawMethod = DrawSelfPart;
+            else
+                drawMethod = DrawSelfMinimal;
         }
 
         private void DrawSelfFull(SpriteBatch _activeSpriteBatch, Vector2 _position)
@@ -57,6 +74,11 @@ namespace MAXNew.UI
                 image.Dispose();
 
             isDisposedSelf = true;
+        }
+
+        public override void Draw(Vector2 position)
+        {
+            base.Draw(position);
         }
 
         ~UISprite()

@@ -29,6 +29,7 @@ namespace MAXNew.UI
 
         private bool AppearWindow(UIControlController window)
         {
+            window.OnShowingWindow();
             _rootScene.AddChild(window.rootControl);
             _showingWindowsList.Add(window);
             return true;
@@ -38,6 +39,8 @@ namespace MAXNew.UI
         {
             _rootScene.RemoveChild(window.rootControl);
             _showingWindowsList.Remove(window);
+            window.OnClosingWindow();
+            window.rootControl.Dispose();
             if (_showingWindowsList.Count == 0)
                 ProcessQueue();
         }
