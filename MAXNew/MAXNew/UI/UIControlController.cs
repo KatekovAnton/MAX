@@ -8,5 +8,8 @@ namespace MAXNew.UI
     public abstract class UIControlController
     {
         public UIControl rootControl;
+
+        public void CloseWindow()
+        { }
     }
 }

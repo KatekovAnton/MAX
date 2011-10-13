@@ -104,6 +104,20 @@ namespace MAXNew.UI
             return null;
         }
 
+        public bool RemoveChild(UIControl child)
+        {
+            Dictionary<string, UIControl>.KeyCollection keys = childByNames.Keys;
+            foreach (string str in keys)
+            {
+                UIControl control = null;
+                if (childByNames.TryGetValue(str, out control) && control == child)
+                    childByNames.Remove(str);
+                
+            }
+            return (childrens.Remove(child));
+     
+        }
+
         public bool HavePoint(Point p)
         {
             return controlZone.Contains(p);

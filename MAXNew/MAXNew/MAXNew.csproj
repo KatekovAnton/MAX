@@ -127,6 +127,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Tools\MaxRes.cs" />
     <Compile Include="ResourceProviders\MAXRESImageProvider.cs" />
+    <Compile Include="UI\UILabel.cs" />
     <Compile Include="UI\UIMenuItemButton.cs" />
     <Compile Include="UI\UIControl.cs" />
     <Compile Include="UI\UIControlController.cs" />
