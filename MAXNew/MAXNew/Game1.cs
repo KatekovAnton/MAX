@@ -48,7 +48,7 @@ namespace MAXNew
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        int index = 13;
+        int index = 0;
         bool lf = true;
 
         public Game1()
