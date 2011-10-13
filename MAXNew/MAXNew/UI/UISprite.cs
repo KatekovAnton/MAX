@@ -51,6 +51,18 @@ namespace MAXNew.UI
             _activeSpriteBatch.Draw(image.texture.texture, Position + _position, image.sourceRct, color);
         }
 
+        protected override void DisposeSelf()
+        {
+            if (!image.disposed)
+                image.Dispose();
 
+            isDisposedSelf = true;
+        }
+
+        ~UISprite()
+        {
+            if (!isDisposedSelf)
+                DisposeSelf();
+        }
     }
 }

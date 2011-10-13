@@ -109,9 +109,11 @@ namespace MAXNew
             camera = new Camera(map);
             userInterface = new UI.UIManager(Game1.device);
             
-           // CashedTexture2D t2d = ImageCache.Instance.getImage("ENDGAME6",TextureType.Paletted);
-           // t2d.userCount++;
-           // UI.UISprite spr = new UI.UISprite(t2d);
+            CashedTexture2D t2d = ImageCache.Instance.GetImage("ENDGAME6",TextureType.Paletted);
+
+            UI.UISprite spr = new UI.UISprite(t2d);
+            spr.Dispose();
+            spr = null;
           //  userInterface.maincontrol.AddChild(spr);
         }
 

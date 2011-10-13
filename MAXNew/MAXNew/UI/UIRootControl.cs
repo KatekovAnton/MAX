@@ -22,5 +22,16 @@ namespace MAXNew.UI
         {
  
         }
+
+        protected override void DisposeSelf()
+        {
+            isDisposedSelf = true;
+        }
+
+        ~UIRootControl()
+        {
+            if (!isDisposedSelf)
+                DisposeSelf();
+        }
     }
 }

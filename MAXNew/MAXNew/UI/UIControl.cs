@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace MAXNew.UI
 {
     public delegate void DrawDelegate(SpriteBatch sb, Vector2 position);
-    public abstract class UIControl
+    public abstract class UIControl: IDisposable
     {
         public int level;
 
@@ -109,5 +109,28 @@ namespace MAXNew.UI
             return controlZone.Contains(p);
         }
 
+        protected bool isDisposedSelf;
+        protected bool isDisposedBase;
+
+        protected abstract void DisposeSelf();
+        protected void DisposeBase()
+        {
+            DisposeSelf();
+            foreach (UIControl contr in childrens)
+            {
+                contr.DisposeBase();
+                contr.DisposeSelf();
+            }
+            isDisposedBase = true;
+        }
+        public void Dispose()
+        {
+            if(!isDisposedBase)
+                DisposeBase();
+        }
+        ~UIControl()
+        {
+            Dispose();
+        }
     }
 }

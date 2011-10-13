@@ -19,14 +19,21 @@ namespace MAXNew.ResourceProviders
             texture = _texture;
         }
 
-        public void retain()
+        public void Retain()
         {
             userCount++;
         }
 
-        public void release()
+        public void Release()
         {
             userCount--;
+            if (userCount == 0) 
+                ImageCache.Instance.RemoveImage(name);
+        }
+        ~CashedTexture2D()
+        {
+            if (!texture.IsDisposed)
+                texture.Dispose();
         }
     }
 }

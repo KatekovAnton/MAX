@@ -38,5 +38,18 @@ namespace MAXNew.UI
         private void _draw(SpriteBatch sb, Vector2 position)
         {
         }
+
+        protected override void DisposeSelf()
+        {
+            IdleImage.Dispose();
+            PressedImage.Dispose();
+            isDisposedSelf = true;
+        }
+
+        ~UIMenuItemButton()
+        {
+            if (!isDisposedSelf)
+                DisposeSelf();
+        }
     }
 }

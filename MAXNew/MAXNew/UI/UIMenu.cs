@@ -47,7 +47,7 @@ namespace MAXNew.UI
             if (!HavePoint(p))
                 return false;
 
-            foreach(UIMenuItem item in childrens)
+            foreach (UIMenuItem item in childrens)
                 if (item.HavePoint(p))
                 {
                     receiver = item;
@@ -61,9 +61,16 @@ namespace MAXNew.UI
             receiver.Update(state);
         }
 
-        ~UIMenu()
+        protected override void DisposeSelf()
         {
             UIManager.menus.Remove(this);
+            isDisposedSelf = true;
+        }
+
+        ~UIMenu()
+        {
+            if (!isDisposedSelf)
+                DisposeSelf();
         }
     }
 

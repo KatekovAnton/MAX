@@ -25,7 +25,7 @@ namespace MAXNew.ResourceProviders
             imageCashe = new Dictionary<string, CashedTexture2D>();
         }
 
-        public CashedTexture2D getImage(string name, TextureType type)
+        public CashedTexture2D GetImage(string name, TextureType type)
         {
             CashedTexture2D texture = null;
             bool alreadyloaded = imageCashe.TryGetValue(name, out texture);
@@ -59,13 +59,9 @@ namespace MAXNew.ResourceProviders
             if (!imageCashe.TryGetValue(name, out image))
                 return;
 
-            image.userCount--;
-            if (image.userCount == 0)
-            {
-                imageCashe.Remove(name);
-                image.texture.Dispose();
-            }
 
+            imageCashe.Remove(name);
+            image.texture.Dispose();
         }
 
         ~ImageCache()
