@@ -16,6 +16,13 @@ namespace MAXNew.Helpers
 
         public Vector2 mousePos;
 
+        public ButtonState lmbState;
+        public ButtonState lastState;
+
+        public bool isJustPressed;
+        public bool isJustReleased;
+
+
         public MouseManager()
         {
             MouseState state = Mouse.GetState();
@@ -31,6 +38,15 @@ namespace MAXNew.Helpers
 
             scrollWheelDelta = scrollWheelValue - state.ScrollWheelValue;
             scrollWheelValue = state.ScrollWheelValue;
+
+            lastState = lmbState;
+            lmbState = state.LeftButton;
+
+            isJustPressed = isJustReleased = false;
+            if (lastState == ButtonState.Pressed && lmbState == ButtonState.Released)
+                isJustReleased = true;
+            else if (lastState == ButtonState.Released && lmbState == ButtonState.Pressed)
+                isJustPressed = true;
             
         }
     }

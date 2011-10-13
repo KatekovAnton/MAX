@@ -180,5 +180,10 @@ namespace MAXNew
                 }
             }
         }
+
+        public void SortMe(IComparer method)
+        {
+            Array.Sort(array, 0, Count, method);
+        }
     }
 }

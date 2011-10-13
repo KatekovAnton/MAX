@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using MAXNew.TextureCache;
+using MAXNew.ResourceProviders;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MAXNew.UI
+namespace MAXNew.ResourceProviders
 {
     public enum TextureType
     {
@@ -14,60 +14,61 @@ namespace MAXNew.UI
         Paletted,
         OutherPng
     };
-    public class UIImageCache
+    public class ImageCache
     {
 
-        public static UIImageCache Instance = new UIImageCache();
+        public static ImageCache Instance = new ImageCache();
         public Dictionary<string, CashedTexture2D> imageCashe;
 
-        protected UIImageCache()
+        protected ImageCache()
         {
             imageCashe = new Dictionary<string, CashedTexture2D>();
         }
 
-        public Texture2D getImage(string name, TextureType type)
+        public CashedTexture2D getImage(string name, TextureType type)
         {
             CashedTexture2D texture = null;
             bool alreadyloaded = imageCashe.TryGetValue(name, out texture);
             if (alreadyloaded && texture != null)
             {
-                texture.userCount++;
-                return texture.texture;
+                return texture;
             }
             switch (type)
             {
                 case TextureType.Simple:
-                    texture = new CashedTexture2D(MAXRESImageProvider.Instance.loadSimpleImage(name));
+                    texture = new CashedTexture2D(MAXRESImageProvider.Instance.loadSimpleImage(name),name);
                     break;
                 case TextureType.Paletted:
-                    texture = new CashedTexture2D(MAXRESImageProvider.Instance.loadPalettedImage(name));
+                    texture = new CashedTexture2D(MAXRESImageProvider.Instance.loadPalettedImage(name), name);
                     break;
                 case TextureType.OutherPng:
                     {
                         //TODO: set stream
-                        texture = new CashedTexture2D(Texture2D.FromStream(Game1.device, null));
+                        texture = new CashedTexture2D(Texture2D.FromStream(Game1.device, null), name);
                     } break;
                 default: break;
 
             }
             imageCashe.Add(name, texture);
-            texture.userCount++;
-            return texture.texture;
+            return texture;
         }
 
         public void RemoveImage(string name)
         {
             CashedTexture2D image = null;
             if (!imageCashe.TryGetValue(name, out image))
-             return;
-            
+                return;
+
             image.userCount--;
-            if(image.userCount==0)
+            if (image.userCount == 0)
+            {
                 imageCashe.Remove(name);
-            
+                image.texture.Dispose();
+            }
+
         }
 
-        ~UIImageCache()
+        ~ImageCache()
         {
             imageCashe.Clear();
         }

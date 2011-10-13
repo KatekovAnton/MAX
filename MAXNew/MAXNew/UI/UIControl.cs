@@ -16,8 +16,8 @@ namespace MAXNew.UI
         public int level;
 
         private UIControl parent = null;
-        private MyContainer<UIControl> childrens;
-        private Dictionary<string, UIControl> childByNames;
+        protected MyContainer<UIControl> childrens;
+        protected Dictionary<string, UIControl> childByNames;
 
         public Rectangle controlZone;
         public Rectangle? scissorRect;
@@ -72,7 +72,6 @@ namespace MAXNew.UI
             }
         }
 
-
         public virtual void AddChild(UIControl child, string name)
         {
             if (child.parent != null)
@@ -89,12 +88,26 @@ namespace MAXNew.UI
             
         }
 
-        public UIControl getChildByName(string name)
+        public UIControl GetChildByName(string name)
         {
             UIControl control = null;
             if (childByNames.TryGetValue(name, out control))
                 return control;
             return null;
         }
+
+        public UIControl GetChildInPoint(Point point)
+        {
+            foreach(UIControl c in childrens)
+                if(c.HavePoint(point))
+                    return c;
+            return null;
+        }
+
+        public bool HavePoint(Point p)
+        {
+            return controlZone.Contains(p);
+        }
+
     }
 }

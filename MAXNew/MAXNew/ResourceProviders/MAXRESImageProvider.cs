@@ -8,7 +8,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MAXNew.TextureCache
+namespace MAXNew.ResourceProviders
 {
     public class MAXRESImageProvider
     {

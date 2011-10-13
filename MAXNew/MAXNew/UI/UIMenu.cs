@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 
@@ -9,12 +9,15 @@ namespace MAXNew.UI
 {
     public class UIMenu : UIControl
     {
+        public static UIMenuPriorityComparer comparer = new UIMenuPriorityComparer();
+
         public int priority;
+        private UIMenuItem receiver;
 
         public UIMenu(Rectangle zone)
             : base(zone)
         {
-            UIRootControl.menus.Add(this);
+            UIManager.menus.Add(this);
         }
 
         public override void AddChild(UIControl child)
@@ -37,5 +40,45 @@ namespace MAXNew.UI
             if (test != null)
                 base.AddChild(child, name);
         }
+
+        public bool AnyChildContainsPoint(Point p)
+        {
+            receiver = null;
+            if (!HavePoint(p))
+                return false;
+
+            foreach(UIMenuItem item in childrens)
+                if (item.HavePoint(p))
+                {
+                    receiver = item;
+                    return true;
+                }
+            return false;
+        }
+
+        public void Update(UIMenuItemState state)
+        {
+            receiver.Update(state);
+        }
+
+        ~UIMenu()
+        {
+            UIManager.menus.Remove(this);
+        }
     }
+
+    public class UIMenuPriorityComparer : IComparer
+    {
+        int IComparer.Compare(object x, object y)
+        {
+            UIMenu X = x as UIMenu;
+            UIMenu Y = y as UIMenu;
+            if (X.priority > Y.priority)
+                return 1;
+            if (X.priority < Y.priority)
+                return -1;
+            return 0;
+        }
+    }
+
 }
