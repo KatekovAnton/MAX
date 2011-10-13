@@ -114,6 +114,7 @@
     <Compile Include="Game\Camera.cs" />
     <Compile Include="Game\Graphic\GraphicMap.cs" />
     <Compile Include="Game\Map.cs" />
+    <Compile Include="Game\Windows\TestWindow.cs" />
     <Compile Include="Helpers\MouseManager.cs" />
     <Compile Include="MyContainer.cs" />
     <Compile Include="ResourceProviders\CachedTexture2D.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="UI\UIRootControl.cs" />
     <Compile Include="UI\UISprite.cs" />
     <Compile Include="UI\UIStaticInfo.cs" />
+    <Compile Include="UI\UIWindowManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
