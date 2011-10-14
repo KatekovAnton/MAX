@@ -113,7 +113,7 @@ namespace MAXNew
 
             UI.UIMenu menu = new UI.UIMenu(new Rectangle(100, 100, 55, 16));
             userInterface.maincontrol.AddChild(menu);
-            UI.UIMenuItemButton button = new UI.UIMenuItemButton(new Rectangle(0, 0, 55, 16), menu);
+            UI.UIFixedStateButton button = new UI.UIFixedStateButton(new Rectangle(0, 0, 55, 16), menu);
             button.SetIdleImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_OF", TextureType.Simple), null));
             button.SetPressedImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_ON", TextureType.Simple), null));
           //  userInterface.maincontrol.AddChild(spr);
@@ -221,7 +221,7 @@ namespace MAXNew
 
             //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, newstate);
 
-            userInterface.Draw();
+            
 
             spriteBatch.Begin();
             spriteBatch.Draw(AIREXPLD.textures[index],
@@ -231,6 +231,7 @@ namespace MAXNew
             spriteBatch.DrawString(XNAFontProvider.CourierNew12RegularBold, string.Format("scale: {0}", camera.scale), Vector2.Zero + new Vector2(0, 20), Color.White);
             spriteBatch.End();
             //GraphicsDevice.RasterizerState = oldstate;
+            userInterface.Draw();
             base.Draw(gameTime);
         }
     }

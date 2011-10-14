@@ -15,7 +15,7 @@ namespace MAXNew.UI
         normal,
         pressed
     };
-    public class UIMenuItemButton : UIMenuItem
+    public class UIButton : UIMenuItem
     {
         public MenuItemAction onMouseUp;
         public MenuItemAction onMouseDown;
@@ -25,7 +25,7 @@ namespace MAXNew.UI
         UISprite IdleImage;
         UISprite PressedImage;
 
-        public UIMenuItemButton(Rectangle zone, UIMenu baseController)
+        public UIButton(Rectangle zone, UIMenu baseController)
             : base(zone, baseController)
         { }
 
@@ -101,7 +101,7 @@ namespace MAXNew.UI
             isDisposedSelf = true;
         }
 
-        ~UIMenuItemButton()
+        ~UIButton()
         {
             if (!isDisposedSelf)
                 DisposeSelf();

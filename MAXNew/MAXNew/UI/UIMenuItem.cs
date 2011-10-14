@@ -18,8 +18,6 @@ namespace MAXNew.UI
         public int tag;
         public object objectTag;
 
-        public MenuItemAction onMouseUp;
-
         protected UIMenuItemInputState currentstate= UIMenuItemInputState.released;
         protected UIMenuItemInputState laststate = UIMenuItemInputState.released;
         public UIMenuItem(Rectangle zone, UIMenu baseMenu)
@@ -56,8 +54,6 @@ namespace MAXNew.UI
 
         public void Update(UIMenuItemInputState actionType, bool isToThisObject)
         {
-            
-
             if (actionType != laststate)
             {
                 if (currentstate == UIMenuItemInputState.pressed && laststate == UIMenuItemInputState.released)
