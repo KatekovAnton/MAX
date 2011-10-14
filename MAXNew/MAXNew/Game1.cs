@@ -111,11 +111,17 @@ namespace MAXNew
             
             CashedTexture2D t2d = ImageCache.Instance.GetImage("ENDGAME6",TextureType.Paletted);
 
-            UI.UIMenu menu = new UI.UIMenu(new Rectangle(100, 100, 55, 16));
+            UI.UIMenu menu = new UI.UIMenu(new Rectangle(100, 100, 55, 32));
             userInterface.maincontrol.AddChild(menu);
             UI.UIFixedStateButton button = new UI.UIFixedStateButton(new Rectangle(0, 0, 55, 16), menu);
             button.SetIdleImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_OF", TextureType.Simple), null));
             button.SetPressedImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_ON", TextureType.Simple), null));
+
+
+            UI.UIButton button1 = new UI.UIButton(new Rectangle(0, 16, 55, 16), menu);
+            button1.SetIdleImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_OF", TextureType.Simple), null));
+            button1.SetPressedImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_ON", TextureType.Simple), null));
+
           //  userInterface.maincontrol.AddChild(spr);
         }
 

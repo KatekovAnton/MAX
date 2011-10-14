@@ -96,6 +96,11 @@ namespace MAXNew.UI
                 AddChild(IdleImage);
         }
 
+        public override void Draw(Vector2 position)
+        {
+            base.Draw(position);
+        }
+
         protected override void DisposeSelf()
         {
             isDisposedSelf = true;
