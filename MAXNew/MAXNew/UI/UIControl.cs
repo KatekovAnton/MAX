@@ -109,11 +109,14 @@ namespace MAXNew.UI
             }
             else
             {
+                
                 if (parent == null)
                     delta = new Point(0,0);
                 else
                     delta = new Point(- parent.globalControlZone.X, -parent.globalControlZone.Y);
             }
+            if(parent!=null)
+                parent.RemoveChild(this);
             globalControlZone.X = controlZone.X + delta.X;
             globalControlZone.Y = controlZone.Y + delta.Y;
             parent = control;

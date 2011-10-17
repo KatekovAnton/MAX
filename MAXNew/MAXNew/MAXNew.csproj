@@ -128,6 +128,8 @@
     <Compile Include="Tools\MaxRes.cs" />
     <Compile Include="ResourceProviders\MAXRESImageProvider.cs" />
     <Compile Include="UI\UIFixedStateButton.cs" />
+    <Compile Include="UI\UIFont.cs" />
+    <Compile Include="UI\UIFontHelper.cs" />
     <Compile Include="UI\UILabel.cs" />
     <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UIControl.cs" />

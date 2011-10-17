@@ -10,6 +10,7 @@ namespace MAXNew.UI
 {
     public class UIManager
     {
+        public static UIControl test;
         public static UIManager Instance;
         public UIRootControl maincontrol;
 

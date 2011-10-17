@@ -7,10 +7,15 @@ using Microsoft.Xna.Framework;
 
 namespace MAXNew.UI
 {
-    public delegate string GetString();
+    public enum UITextAlignment
+    {
+        Left,
+        Right,
+        Center
+    };
+
     public class UILabel:UIControl
     {
-        GetString getstr;
         public UILabel(Rectangle rect)
             : base(rect)
         { }

@@ -14,9 +14,7 @@ namespace MAXNew.ResourceProviders
         public XNAFontProvider(ContentManager content)
         {
             if (CourierNew12RegularBold == null)
-            {
                 CourierNew12RegularBold = content.Load<SpriteFont>("SpriteFont1");
-            }
         }
     }
 }

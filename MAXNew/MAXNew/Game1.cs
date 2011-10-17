@@ -39,11 +39,16 @@ namespace MAXNew
         //user interface
         public UI.UIManager userInterface;
 
+        //fonts
+        public UI.UIFontHelper fonts;
+
 
         //resources
         MAXNew.ResourceProviders.MAXRESImageProvider maxres;
         MAXNew.ResourceProviders.ImageCache images;
-        MAXNew.ResourceProviders.XNAFontProvider fonts;
+        
+        
+        
         GraphicUnit AIREXPLD;
 
         public Map map;
@@ -134,7 +139,8 @@ namespace MAXNew
 
             maxres = new ResourceProviders.MAXRESImageProvider();
             GraphicMap.mapShader = Content.Load<Effect>("MapRender");
-            fonts = new ResourceProviders.XNAFontProvider(Content);
+            ResourceProviders.XNAFontProvider fonts1 = new ResourceProviders.XNAFontProvider(Content);
+            fonts = new UI.UIFontHelper();
             // TODO: use this.Content to load your game content here
  
         }
