@@ -127,6 +127,12 @@ namespace MAXNew
             button1.SetIdleImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_OF", TextureType.Simple), null));
             button1.SetPressedImage(new ImagePart(ImageCache.Instance.GetImage("AMMO_ON", TextureType.Simple), null));
 
+
+            UI.UILabel label = new UI.UILabel(new Rectangle(52, 33, 100, 100));
+            label.Font = UI.UIFontHelper.CourierNew12RegularBold;
+            label.Text = "test text";
+            label.Color = Color.Red;
+            userInterface.maincontrol.AddChild(label);
           //  userInterface.maincontrol.AddChild(spr);
         }
 
