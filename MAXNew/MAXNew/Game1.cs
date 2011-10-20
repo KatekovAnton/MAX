@@ -133,7 +133,12 @@ namespace MAXNew
             label.Text = "test text";
             label.Color = Color.Red;
             userInterface.maincontrol.AddChild(label);
-          //  userInterface.maincontrol.AddChild(spr);
+
+            UI.UISprite spr = new UI.UISprite(ImageCache.Instance.GetImage("ENDGAME6", TextureType.Paletted));
+            spr.Rotation = 1.0f;
+            spr.origin = new Vector2(320, 240);
+            userInterface.maincontrol.AddChild(spr);
+
         }
 
 

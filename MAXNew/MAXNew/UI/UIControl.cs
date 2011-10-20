@@ -59,7 +59,7 @@ namespace MAXNew.UI
                 child.Move(delta);
         }
 
-        protected Vector2 origin = Vector2.Zero;
+        public Vector2 origin = Vector2.Zero;
 
         public Color color = Color.White;
         public Vector2 scale = new Vector2(1, 1);

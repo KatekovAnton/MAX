@@ -12,6 +12,25 @@ namespace MAXNew.UI
 {
     public class UISprite:UIControl
     {
+        private float rotation;
+        public float Rotation
+        {
+            get
+            {
+                return rotation;
+            }
+            set
+            {
+                rotation = value;
+                if (rotation == 0.0)
+                {
+                    drawMethod = DrawSelfMinimal;
+                }
+                else
+                    drawMethod = DrawSelfFull;
+            }
+        }
+
         public ImagePart image;
         public UISprite(CashedTexture2D _tex):base(new Rectangle(0,0,_tex.texture.Width,_tex.texture.Height))
         {
@@ -45,27 +64,27 @@ namespace MAXNew.UI
 
         private void DrawSelfFull(SpriteBatch _activeSpriteBatch, Vector2 _position)
         {
-            _activeSpriteBatch.Draw(image.texture.texture, Position + _position, image.sourceRct, color, 0.0f, origin, scale, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0.0f);
+            _activeSpriteBatch.Draw(image.texture.texture, Position + _position + origin, image.sourceRct, color, rotation, origin, scale, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0.0f);
         }
 
         private void DrawSelfMinimal(SpriteBatch _activeSpriteBatch, Vector2 _position)
         {
-            _activeSpriteBatch.Draw(image.texture.texture, Position + _position, color);
+            _activeSpriteBatch.Draw(image.texture.texture, Position + _position + origin, color);
         }
 
         private void DrawSelfToRect(SpriteBatch _activeSpriteBatch, Vector2 _position)
         {
-            _activeSpriteBatch.Draw(image.texture.texture, new Rectangle(destinationRect.Value.X + (int)_position.X, destinationRect.Value.Y + (int)_position.Y, destinationRect.Value.Width, destinationRect.Value.Height), color);
+            _activeSpriteBatch.Draw(image.texture.texture, new Rectangle(destinationRect.Value.X + (int)_position.X + (int)origin.X, destinationRect.Value.Y + (int)_position.Y + (int)origin.Y, destinationRect.Value.Width, destinationRect.Value.Height), color);
         }
 
         private void DrawSelfPartToRect(SpriteBatch _activeSpriteBatch, Vector2 _position)
         {
-            _activeSpriteBatch.Draw(image.texture.texture, new Rectangle(destinationRect.Value.X + (int)_position.X, destinationRect.Value.Y + (int)_position.Y, destinationRect.Value.Width, destinationRect.Value.Height), image.sourceRct, color);
+            _activeSpriteBatch.Draw(image.texture.texture, new Rectangle(destinationRect.Value.X + (int)_position.X + (int)origin.X, destinationRect.Value.Y + (int)_position.Y + (int)origin.Y, destinationRect.Value.Width, destinationRect.Value.Height), image.sourceRct, color);
         }
 
         private void DrawSelfPart(SpriteBatch _activeSpriteBatch, Vector2 _position)
         {
-            _activeSpriteBatch.Draw(image.texture.texture, Position + _position, image.sourceRct, color);
+            _activeSpriteBatch.Draw(image.texture.texture, Position + _position + origin, image.sourceRct, color);
         }
 
         protected override void DisposeSelf()
