@@ -119,6 +119,7 @@
     <Compile Include="MyContainer.cs" />
     <Compile Include="ResourceProviders\CachedTexture2D.cs" />
     <Compile Include="ResourceProviders\XNAFontProvider.cs" />
+    <Compile Include="srccore\common.cs" />
     <Compile Include="Tools\GraphicTools.cs" />
     <Compile Include="Game\Graphic\GraphicUnit.cs" />
     <Compile Include="Helpers\FpsCounter.cs" />
