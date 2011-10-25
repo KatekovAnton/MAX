@@ -34,17 +34,17 @@ namespace MAXNew.srccore
             public const bool VFS_GLOBAL_DOMAIN=false;
         #endif
 
-        public const string[] clannames = new string[8] {"The Choosen", "Crimson Path", "Von Griffin", 
+        public readonly string[] clannames = new string[8] {"The Choosen", "Crimson Path", "Von Griffin", 
             "Ayer's Hand", "Musashi", "Sacred Eights", "7 Knights", "Axis Inc."};
 
         //############################################################################//
         //Research
         public const int RS_COUNT=8;
-        public const string[] res_names = new string[RS_COUNT] {"Attack", "Shots", "Range", "Armor", "Hits",
+        public readonly string[] res_names = new string[RS_COUNT] {"Attack", "Shots", "Range", "Armor", "Hits",
             "Speed", "Scan", "Cost"};
         //############################################################################//
         //Upgrades
-        public const int[] def_ut_factors = new int[10] {16, 16, 8, 32, 32, 16, 8, 8, 32, 8};
+        public readonly int[] def_ut_factors = new int[10] {16, 16, 8, 32, 32, 16, 8, 8, 32, 8};
         public const int max_upgrade_price = 1000;
         public const int research_increase = 10;   
   
@@ -334,7 +334,7 @@ namespace MAXNew.srccore
         public const int RES_MIN        = 1; //RES_MAT
         public const int RES_MAX        = 5; //RES_HUMAN
         //Placing a numeration from "zero"
-        public const string[] res_ids = new string[RES_MAX] {"materials", "fuels", "golds", "powers", "mans");
+        public readonly string[] res_ids = new string[RES_MAX] {"materials", "fuels", "golds", "powers", "mans"};
         //############################################################################//
         public const int ae_setup      = 0;
         public const int ae_begin_turn = 1;
@@ -528,8 +528,8 @@ namespace MAXNew.srccore
         }
         //############################################################################//
         //Aux types
-        typunits[] ptypunitspa;
-        typunitsdb[] ptypunitsdba;
+        public typunits[] ptypunitspa;
+        public typunitsdb[] ptypunitsdba;
 
         /* LOL
         ptypunits=^typunits;
