@@ -311,6 +311,11 @@ namespace MAXNew.ResourceProviders
 
         private void LoadFrame(BinaryReader source, int index, MAXNew.Game.Graphic.GraphicUnit target, long baseOffset)
         {
+            if (index == 15 + 8)
+            {
+                int a = 0;
+                a++;
+            }
             byte[] pixels;
 
             ushort width = source.ReadUInt16();
@@ -347,7 +352,8 @@ namespace MAXNew.ResourceProviders
                 {
                     dest.Seek(buf, SeekOrigin.Current);
                     buf = source.ReadByte();
-                    dest.Write(source.ReadBytes(buf), 0, buf);
+                    byte[] rowbytest = source.ReadBytes(buf);
+                    dest.Write(rowbytest, 0, buf);
                     buf = source.ReadByte();
                 }
 

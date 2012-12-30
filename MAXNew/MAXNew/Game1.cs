@@ -110,7 +110,7 @@ namespace MAXNew
             map.clearLoadData();
 
 
-            AIREXPLD = maxres.loadMultiImage("AIREXPLD");
+            AIREXPLD = maxres.loadMultiImage("TANK");
             camera = new Camera(map);
             userInterface = new UI.UIManager(Game1.device);
             
@@ -134,10 +134,6 @@ namespace MAXNew
             label.Color = Color.Red;
             userInterface.maincontrol.AddChild(label);
 
-            UI.UISprite spr = new UI.UISprite(ImageCache.Instance.GetImage("ENDGAME6", TextureType.Paletted));
-            spr.Rotation = 1.0f;
-            spr.origin = new Vector2(320, 240);
-            userInterface.maincontrol.AddChild(spr);
 
         }
 
@@ -234,7 +230,7 @@ namespace MAXNew
             map.draw();
 
 
-            Vector2 pos = new Vector2(100, 100);
+            Vector2 pos = new Vector2(200, 200);
           //RasterizerState oldstate = GraphicsDevice.RasterizerState;
           //RasterizerState newstate = new RasterizerState();
           //newstate.ScissorTestEnable = true;
